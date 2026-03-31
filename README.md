@@ -8,7 +8,7 @@ Apresentação institucional interativa do Departamento de Produto da **AUVP Cap
 
 Este projeto é um **site de apresentação** criado para comunicar, de forma elegante e interativa, quem é o Time de Produto da AUVP Capital: sua missão, seus pilares de atuação, as atividades do dia a dia, as conexões com outras áreas da empresa, a liderança e o processo de trabalho.
 
-O site foi desenvolvido inteiramente com **HTML, CSS e JavaScript puros** — sem dependências externas ou frameworks — e é composto por um único arquivo (`index.html`).
+O site foi desenvolvido inteiramente com **HTML** — sem dependências externas ou frameworks — e é composto por um único arquivo (`index.html`).
 
 ---
 
