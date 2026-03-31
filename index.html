@@ -1,1319 +1,1648 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Produto — AUVP Capital</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --gold: #efbe4e;
-  --gold-light: #f5d47a;
-  --gold-dark: #c9982d;
-  --black: #0a0a0a;
-  --dark: #111111;
-  --dark-card: #161616;
-  --dark-card-hover: #1c1c1c;
-  --gray: #888888;
-  --gray-light: #aaaaaa;
-  --white: #f0f0f0;
-  --white-pure: #ffffff;
-}
-
-html { scroll-behavior: smooth; font-size: 16px; }
-
-body {
-  background: var(--black);
-  color: var(--white);
-  font-family: 'Outfit', sans-serif;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--black); }
-::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
-
-/* ── Grain overlay ── */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-}
-
-/* ── Navigation ── */
-.nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 1.25rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: background .4s, backdrop-filter .4s, padding .4s;
-}
-.nav.scrolled {
-  background: rgba(10,10,10,.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: .8rem 2rem;
-  border-bottom: 1px solid rgba(239,190,78,.08);
-}
-.nav-logo { height: 28px; opacity: .9; transition: opacity .3s; }
-.nav-logo:hover { opacity: 1; }
-.nav-links { display: flex; gap: 2rem; }
-.nav-links a {
-  color: var(--gray-light);
-  text-decoration: none;
-  font-size: .8rem;
-  font-weight: 500;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  transition: color .3s;
-  position: relative;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px; left: 0;
-  width: 0; height: 1px;
-  background: var(--gold);
-  transition: width .3s;
-}
-.nav-links a:hover { color: var(--gold); }
-.nav-links a:hover::after { width: 100%; }
-
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  z-index: 110;
-  padding: 4px;
-}
-.menu-toggle span {
-  width: 24px; height: 1.5px;
-  background: var(--white);
-  transition: all .3s;
-  display: block;
-}
-.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 5px); }
-.menu-toggle.active span:nth-child(2) { opacity: 0; }
-.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -5px); }
-
-.mobile-menu {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(10,10,10,.97);
-  backdrop-filter: blur(30px);
-  z-index: 105;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2.5rem;
-  opacity: 0;
-  transition: opacity .4s;
-}
-.mobile-menu.open { opacity: 1; }
-.mobile-menu a {
-  color: var(--white);
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 300;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  transition: color .3s;
-}
-.mobile-menu a:hover { color: var(--gold); }
-
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .menu-toggle { display: flex; }
-  .mobile-menu { display: flex; opacity: 0; pointer-events: none; }
-  .mobile-menu.open { pointer-events: all; }
-}
-
-/* ── Hero ── */
-.hero {
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-bg-glow {
-  position: absolute;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(239,190,78,.08) 0%, transparent 70%);
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  animation: pulseGlow 6s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: .6; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
-}
-
-.hero-lines {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  opacity: .06;
-}
-.hero-lines::before, .hero-lines::after {
-  content: '';
-  position: absolute;
-  background: var(--gold);
-}
-.hero-lines::before {
-  width: 1px; height: 40%;
-  top: 0; left: 50%;
-  animation: lineDown 3s ease-out forwards;
-}
-.hero-lines::after {
-  width: 1px; height: 40%;
-  bottom: 0; right: 30%;
-  animation: lineUp 3s .5s ease-out forwards;
-}
-
-@keyframes lineDown { from { height: 0; } to { height: 40%; } }
-@keyframes lineUp { from { height: 0; } to { height: 40%; } }
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  padding: .45rem 1.2rem;
-  border: 1px solid rgba(239,190,78,.2);
-  border-radius: 100px;
-  font-size: .7rem;
-  font-weight: 500;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 2.5rem;
-  opacity: 0;
-  animation: fadeUp .8s .3s ease-out forwards;
-}
-.hero-badge::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: var(--gold);
-  border-radius: 50%;
-  animation: blink 2s infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .3; }
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.8rem, 8vw, 6.5rem);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -.02em;
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  animation: fadeUp .8s .5s ease-out forwards;
-}
-.hero h1 em {
-  font-style: italic;
-  color: var(--gold);
-}
-
-.hero-sub {
-  font-size: clamp(.95rem, 2vw, 1.15rem);
-  color: var(--gray-light);
-  font-weight: 300;
-  max-width: 520px;
-  line-height: 1.7;
-  opacity: 0;
-  animation: fadeUp .8s .7s ease-out forwards;
-}
-
-.hero-scroll {
-  position: absolute;
-  bottom: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .5rem;
-  opacity: 0;
-  animation: fadeUp .8s 1.2s ease-out forwards;
-}
-.hero-scroll span {
-  font-size: .65rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--gray);
-}
-.scroll-line {
-  width: 1px; height: 40px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-@keyframes scrollPulse {
-  0%, 100% { opacity: .3; transform: scaleY(1); }
-  50% { opacity: 1; transform: scaleY(1.3); }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ── Section base ── */
-section {
-  padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
-}
-
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: .6rem;
-  font-size: .7rem;
-  font-weight: 600;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1.5rem;
-}
-.section-label::before {
-  content: '';
-  width: 30px; height: 1px;
-  background: var(--gold);
-}
-
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 400;
-  line-height: 1.15;
-  margin-bottom: 1.5rem;
-}
-.section-title em { font-style: italic; color: var(--gold); }
-
-.section-text {
-  color: var(--gray-light);
-  font-weight: 300;
-  line-height: 1.8;
-  font-size: clamp(.9rem, 1.5vw, 1.05rem);
-  max-width: 640px;
-}
-
-/* ── Reveal animation ── */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity .7s ease-out, transform .7s ease-out;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ── About section ── */
-.about {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: start;
-}
-
-.about-right {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.about-stat {
-  padding: 1.5rem;
-  border: 1px solid rgba(239,190,78,.1);
-  border-radius: 12px;
-  background: var(--dark-card);
-  transition: all .4s;
-  cursor: default;
-}
-.about-stat:hover {
-  border-color: rgba(239,190,78,.3);
-  background: var(--dark-card-hover);
-  transform: translateX(8px);
-}
-.about-stat-label {
-  font-size: .7rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: .4rem;
-}
-.about-stat-value {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  color: var(--gold-light);
-}
-
-@media (max-width: 768px) {
-  .about { grid-template-columns: 1fr; gap: 2.5rem; }
-}
-
-/* ── Pillar cards ── */
-.pillars {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.pillars-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin-top: 3rem;
-}
-
-.pillar-card {
-  background: var(--dark-card);
-  border: 1px solid rgba(255,255,255,.04);
-  border-radius: 16px;
-  padding: 2rem 1.5rem;
-  cursor: pointer;
-  transition: all .5s cubic-bezier(.23,1,.32,1);
-  position: relative;
-  overflow: hidden;
-}
-.pillar-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  opacity: 0;
-  transition: opacity .4s;
-}
-.pillar-card:hover::before { opacity: 1; }
-.pillar-card:hover {
-  border-color: rgba(239,190,78,.15);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(0,0,0,.4);
-}
-
-.pillar-icon {
-  width: 48px; height: 48px;
-  border-radius: 12px;
-  background: rgba(239,190,78,.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  margin-bottom: 1.25rem;
-  transition: background .3s;
-}
-.pillar-card:hover .pillar-icon { background: rgba(239,190,78,.15); }
-
-.pillar-card h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: .6rem;
-  transition: color .3s;
-}
-.pillar-card:hover h3 { color: var(--gold-light); }
-
-.pillar-card p {
-  font-size: .85rem;
-  color: var(--gray);
-  line-height: 1.65;
-  font-weight: 300;
-}
-
-.pillar-detail {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .5s cubic-bezier(.23,1,.32,1), margin .3s;
-}
-.pillar-card.expanded .pillar-detail {
-  max-height: 300px;
-  margin-top: 1rem;
-}
-.pillar-detail-inner {
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255,255,255,.06);
-  font-size: .82rem;
-  color: var(--gray-light);
-  line-height: 1.7;
-  font-weight: 300;
-}
-
-.pillar-expand {
-  display: flex;
-  align-items: center;
-  gap: .4rem;
-  margin-top: 1rem;
-  font-size: .72rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--gold-dark);
-  font-weight: 500;
-  transition: color .3s;
-}
-.pillar-expand svg {
-  width: 14px; height: 14px;
-  transition: transform .3s;
-}
-.pillar-card.expanded .pillar-expand svg { transform: rotate(180deg); }
-
-@media (max-width: 900px) {
-  .pillars-grid { grid-template-columns: 1fr; }
-}
-
-/* ── Activities (accordion) ── */
-.activities {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.activity-list {
-  margin-top: 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-}
-
-.activity-item {
-  border: 1px solid rgba(255,255,255,.04);
-  border-radius: 12px;
-  background: var(--dark-card);
-  overflow: hidden;
-  transition: border-color .3s;
-}
-.activity-item:hover { border-color: rgba(239,190,78,.1); }
-
-.activity-header {
-  padding: 1.25rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  gap: 1rem;
-  -webkit-tap-highlight-color: transparent;
-}
-.activity-header-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.activity-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
-  color: var(--gold-dark);
-  min-width: 28px;
-}
-.activity-header h4 {
-  font-size: .95rem;
-  font-weight: 500;
-  transition: color .3s;
-}
-.activity-item:hover .activity-header h4 { color: var(--gold-light); }
-
-.activity-toggle {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .3s;
-  flex-shrink: 0;
-}
-.activity-item.open .activity-toggle {
-  background: var(--gold);
-  border-color: var(--gold);
-}
-.activity-toggle svg {
-  width: 12px; height: 12px;
-  stroke: var(--gray);
-  transition: all .3s;
-}
-.activity-item.open .activity-toggle svg {
-  stroke: var(--black);
-  transform: rotate(45deg);
-}
-
-.activity-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .5s cubic-bezier(.23,1,.32,1);
-}
-.activity-body-inner {
-  padding: 0 1.5rem 1.25rem 3.75rem;
-  font-size: .85rem;
-  color: var(--gray-light);
-  line-height: 1.7;
-  font-weight: 300;
-}
-
-/* ── Connections (interactive orbit) ── */
-.connections {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.orbit-container {
-  position: relative;
-  width: min(500px, 85vw);
-  height: min(500px, 85vw);
-  margin: 3rem auto 0;
-}
-
-.orbit-center {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px; height: 100px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(239,190,78,.15), rgba(239,190,78,.03));
-  border: 1px solid rgba(239,190,78,.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: .75rem;
-  letter-spacing: .08em;
-  color: var(--gold);
-  text-align: center;
-  line-height: 1.3;
-  z-index: 2;
-}
-
-.orbit-ring {
-  position: absolute;
-  top: 50%; left: 50%;
-  border-radius: 50%;
-  border: 1px solid rgba(239,190,78,.06);
-}
-.orbit-ring-1 {
-  width: 260px; height: 260px;
-  transform: translate(-50%, -50%);
-  animation: spinSlow 60s linear infinite;
-}
-.orbit-ring-2 {
-  width: 400px; height: 400px;
-  transform: translate(-50%, -50%);
-  animation: spinSlow 90s linear infinite reverse;
-}
-
-@keyframes spinSlow { to { transform: translate(-50%, -50%) rotate(360deg); } }
-
-.orbit-node {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 80px; height: 80px;
-  margin: -40px 0 0 -40px;
-  background: var(--dark-card);
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .25rem;
-  cursor: pointer;
-  transition: all .4s;
-  z-index: 3;
-}
-.orbit-node:hover {
-  border-color: rgba(239,190,78,.3);
-  transform: translate(var(--tx), var(--ty)) scale(1.12) !important;
-  box-shadow: 0 10px 40px rgba(239,190,78,.1);
-}
-.orbit-node-icon { font-size: 1.2rem; }
-.orbit-node-label {
-  font-size: .55rem;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--gray-light);
-  font-weight: 500;
-  text-align: center;
-  line-height: 1.2;
-}
-
-/* ── Leadership ── */
-.leadership {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.leader-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 3rem;
-}
-
-.leader-card {
-  padding: 2.5rem 2rem;
-  border: 1px solid rgba(255,255,255,.04);
-  border-radius: 16px;
-  background: var(--dark-card);
-  position: relative;
-  overflow: hidden;
-  transition: all .5s;
-}
-.leader-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
-  transform: scaleX(0);
-  transition: transform .5s;
-}
-.leader-card:hover::after { transform: scaleX(1); }
-.leader-card:hover {
-  border-color: rgba(239,190,78,.1);
-  transform: translateY(-4px);
-}
-
-.leader-role {
-  font-size: .65rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 600;
-  margin-bottom: .8rem;
-}
-.leader-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 400;
-  margin-bottom: .5rem;
-}
-.leader-desc {
-  font-size: .85rem;
-  color: var(--gray);
-  line-height: 1.65;
-  font-weight: 300;
-}
-
-@media (max-width: 768px) {
-  .leader-cards { grid-template-columns: 1fr; }
-}
-
-/* ── Values marquee ── */
-.values-section {
-  padding: clamp(3rem, 8vw, 6rem) 0;
-  overflow: hidden;
-}
-
-.marquee-track {
-  display: flex;
-  gap: 3rem;
-  animation: marquee 25s linear infinite;
-  width: max-content;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.marquee-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-shrink: 0;
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 400;
-  color: rgba(240,240,240,.12);
-  white-space: nowrap;
-  transition: color .4s;
-}
-.marquee-item:hover { color: rgba(239,190,78,.4); }
-.marquee-dot {
-  width: 6px; height: 6px;
-  background: var(--gold);
-  border-radius: 50%;
-  opacity: .3;
-}
-
-/* ── Process timeline ── */
-.process {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.timeline {
-  margin-top: 3rem;
-  position: relative;
-  padding-left: 2rem;
-}
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent);
-}
-
-.timeline-item {
-  position: relative;
-  padding: 0 0 3rem 2rem;
-}
-.timeline-item:last-child { padding-bottom: 0; }
-
-.timeline-dot {
-  position: absolute;
-  left: -2.35rem; top: .3rem;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  border: 2px solid var(--gold);
-  background: var(--black);
-  transition: all .3s;
-}
-.timeline-item:hover .timeline-dot {
-  background: var(--gold);
-  box-shadow: 0 0 20px rgba(239,190,78,.3);
-}
-
-.timeline-step {
-  font-size: .65rem;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--gold-dark);
-  font-weight: 600;
-  margin-bottom: .4rem;
-}
-.timeline-item h4 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: .4rem;
-}
-.timeline-item p {
-  font-size: .85rem;
-  color: var(--gray);
-  line-height: 1.65;
-  font-weight: 300;
-}
-
-/* ── Footer ── */
-.footer {
-  border-top: 1px solid rgba(255,255,255,.04);
-  padding: 3rem clamp(1.5rem, 5vw, 4rem);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-.footer-logo { height: 22px; opacity: .4; }
-.footer-text {
-  font-size: .72rem;
-  color: var(--gray);
-  letter-spacing: .05em;
-}
-
-/* ── Cursor glow (desktop) ── */
-.cursor-glow {
-  position: fixed;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(239,190,78,.04) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-  transform: translate(-50%, -50%);
-  transition: opacity .3s;
-  display: none;
-}
-@media (hover: hover) {
-  .cursor-glow { display: block; }
-}
-
-/* ── Divider ── */
-.divider {
-  width: 60px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
-  margin: 0 auto;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produto — AUVP Capital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --gold: #efbe4e;
+      --gold-light: #f5d47a;
+      --gold-dark: #c9982d;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --dark-card: #161616;
+      --dark-card-hover: #1c1c1c;
+      --gray: #888888;
+      --gray-light: #aaaaaa;
+      --white: #f0f0f0;
+      --white-pure: #ffffff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--black);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--gold-dark);
+      border-radius: 4px;
+    }
+
+    /* ── Grain overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background .4s, backdrop-filter .4s, padding .4s;
+    }
+
+    .nav.scrolled {
+      background: rgba(10, 10, 10, .85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: .8rem 2rem;
+      border-bottom: 1px solid rgba(239, 190, 78, .08);
+    }
+
+    .nav-logo {
+      height: 28px;
+      opacity: .9;
+      transition: opacity .3s;
+    }
+
+    .nav-logo:hover {
+      opacity: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--gray-light);
+      text-decoration: none;
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      transition: color .3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width .3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 110;
+      padding: 4px;
+    }
+
+    .menu-toggle span {
+      width: 24px;
+      height: 1.5px;
+      background: var(--white);
+      transition: all .3s;
+      display: block;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(4px, 5px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(4px, -5px);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, .97);
+      backdrop-filter: blur(30px);
+      z-index: 105;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      opacity: 0;
+      transition: opacity .4s;
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+    }
+
+    .mobile-menu a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      transition: color .3s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: flex;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .mobile-menu.open {
+        pointer-events: all;
+      }
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(239, 190, 78, .08) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulseGlow 6s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        opacity: .6;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.15);
+      }
+    }
+
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      opacity: .06;
+    }
+
+    .hero-lines::before,
+    .hero-lines::after {
+      content: '';
+      position: absolute;
+      background: var(--gold);
+    }
+
+    .hero-lines::before {
+      width: 1px;
+      height: 40%;
+      top: 0;
+      left: 50%;
+      animation: lineDown 3s ease-out forwards;
+    }
+
+    .hero-lines::after {
+      width: 1px;
+      height: 40%;
+      bottom: 0;
+      right: 30%;
+      animation: lineUp 3s .5s ease-out forwards;
+    }
+
+    @keyframes lineDown {
+      from {
+        height: 0;
+      }
+
+      to {
+        height: 40%;
+      }
+    }
+
+    @keyframes lineUp {
+      from {
+        height: 0;
+      }
+
+      to {
+        height: 40%;
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .45rem 1.2rem;
+      border: 1px solid rgba(239, 190, 78, .2);
+      border-radius: 100px;
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp .8s .3s ease-out forwards;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .3;
+      }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 6.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp .8s .5s ease-out forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: clamp(.95rem, 2vw, 1.15rem);
+      color: var(--gray-light);
+      font-weight: 300;
+      max-width: 520px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp .8s .7s ease-out forwards;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      opacity: 0;
+      animation: fadeUp .8s 1.2s ease-out forwards;
+    }
+
+    .hero-scroll span {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+
+      0%,
+      100% {
+        opacity: .3;
+        transform: scaleY(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scaleY(1.3);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Section base ── */
+    section {
+      padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .section-text {
+      color: var(--gray-light);
+      font-weight: 300;
+      line-height: 1.8;
+      font-size: clamp(.9rem, 1.5vw, 1.05rem);
+      max-width: 640px;
+    }
+
+    /* ── Reveal animation ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .7s ease-out, transform .7s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── About section ── */
+    .about {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .about-stat {
+      padding: 1.5rem;
+      border: 1px solid rgba(239, 190, 78, .1);
+      border-radius: 12px;
+      background: var(--dark-card);
+      transition: all .4s;
+      cursor: default;
+    }
+
+    .about-stat:hover {
+      border-color: rgba(239, 190, 78, .3);
+      background: var(--dark-card-hover);
+      transform: translateX(8px);
+    }
+
+    .about-stat-label {
+      font-size: .7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: .4rem;
+    }
+
+    .about-stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--gold-light);
+    }
+
+    @media (max-width: 768px) {
+      .about {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    /* ── Pillar cards ── */
+    .pillars {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    .pillar-card {
+      background: var(--dark-card);
+      border: 1px solid rgba(255, 255, 255, .04);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      cursor: pointer;
+      transition: all .5s cubic-bezier(.23, 1, .32, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+
+    .pillar-card:hover::before {
+      opacity: 1;
+    }
+
+    .pillar-card:hover {
+      border-color: rgba(239, 190, 78, .15);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+    }
+
+    .pillar-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(239, 190, 78, .08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1.25rem;
+      transition: background .3s;
+    }
+
+    .pillar-card:hover .pillar-icon {
+      background: rgba(239, 190, 78, .15);
+    }
+
+    .pillar-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: .6rem;
+      transition: color .3s;
+    }
+
+    .pillar-card:hover h3 {
+      color: var(--gold-light);
+    }
+
+    .pillar-card p {
+      font-size: .85rem;
+      color: var(--gray);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    .pillar-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .5s cubic-bezier(.23, 1, .32, 1), margin .3s;
+    }
+
+    .pillar-card.expanded .pillar-detail {
+      max-height: 300px;
+      margin-top: 1rem;
+    }
+
+    .pillar-detail-inner {
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      font-size: .82rem;
+      color: var(--gray-light);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .pillar-expand {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: 1rem;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 500;
+      transition: color .3s;
+    }
+
+    .pillar-expand svg {
+      width: 14px;
+      height: 14px;
+      transition: transform .3s;
+    }
+
+    .pillar-card.expanded .pillar-expand svg {
+      transform: rotate(180deg);
+    }
+
+    @media (max-width: 900px) {
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Activities (accordion) ── */
+    .activities {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .activity-list {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .activity-item {
+      border: 1px solid rgba(255, 255, 255, .04);
+      border-radius: 12px;
+      background: var(--dark-card);
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+
+    .activity-item:hover {
+      border-color: rgba(239, 190, 78, .1);
+    }
+
+    .activity-header {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      gap: 1rem;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .activity-header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .activity-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold-dark);
+      min-width: 28px;
+    }
+
+    .activity-header h4 {
+      font-size: .95rem;
+      font-weight: 500;
+      transition: color .3s;
+    }
+
+    .activity-item:hover .activity-header h4 {
+      color: var(--gold-light);
+    }
+
+    .activity-toggle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s;
+      flex-shrink: 0;
+    }
+
+    .activity-item.open .activity-toggle {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .activity-toggle svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--gray);
+      transition: all .3s;
+    }
+
+    .activity-item.open .activity-toggle svg {
+      stroke: var(--black);
+      transform: rotate(45deg);
+    }
+
+    .activity-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .5s cubic-bezier(.23, 1, .32, 1);
+    }
+
+    .activity-body-inner {
+      padding: 0 1.5rem 1.25rem 3.75rem;
+      font-size: .85rem;
+      color: var(--gray-light);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── Connections (interactive orbit) ── */
+    .connections {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .orbit-container {
+      position: relative;
+      width: min(500px, 85vw);
+      height: min(500px, 85vw);
+      margin: 3rem auto 0;
+    }
+
+    .orbit-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(239, 190, 78, .15), rgba(239, 190, 78, .03));
+      border: 1px solid rgba(239, 190, 78, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: .75rem;
+      letter-spacing: .08em;
+      color: var(--gold);
+      text-align: center;
+      line-height: 1.3;
+      z-index: 2;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba(239, 190, 78, .06);
+    }
+
+    .orbit-ring-1 {
+      width: 260px;
+      height: 260px;
+      transform: translate(-50%, -50%);
+      animation: spinSlow 60s linear infinite;
+    }
+
+    .orbit-ring-2 {
+      width: 400px;
+      height: 400px;
+      transform: translate(-50%, -50%);
+      animation: spinSlow 90s linear infinite reverse;
+    }
+
+    @keyframes spinSlow {
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .orbit-node {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80px;
+      height: 80px;
+      margin: -40px 0 0 -40px;
+      background: var(--dark-card);
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .25rem;
+      cursor: pointer;
+      transition: all .4s;
+      z-index: 3;
+    }
+
+    .orbit-node:hover {
+      border-color: rgba(239, 190, 78, .3);
+      transform: translate(var(--tx), var(--ty)) scale(1.12) !important;
+      box-shadow: 0 10px 40px rgba(239, 190, 78, .1);
+    }
+
+    .orbit-node-icon {
+      font-size: 1.2rem;
+    }
+
+    .orbit-node-label {
+      font-size: .55rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* ── Leadership ── */
+    .leadership {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .leader-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .leader-card {
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(255, 255, 255, .04);
+      border-radius: 16px;
+      background: var(--dark-card);
+      position: relative;
+      overflow: hidden;
+      transition: all .5s;
+    }
+
+    .leader-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-dark));
+      transform: scaleX(0);
+      transition: transform .5s;
+    }
+
+    .leader-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .leader-card:hover {
+      border-color: rgba(239, 190, 78, .1);
+      transform: translateY(-4px);
+    }
+
+    .leader-role {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: .8rem;
+    }
+
+    .leader-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: .5rem;
+    }
+
+    .leader-desc {
+      font-size: .85rem;
+      color: var(--gray);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    @media (max-width: 768px) {
+      .leader-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Values marquee ── */
+    .values-section {
+      padding: clamp(3rem, 8vw, 6rem) 0;
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 25s linear infinite;
+      width: max-content;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 400;
+      color: rgba(240, 240, 240, .12);
+      white-space: nowrap;
+      transition: color .4s;
+    }
+
+    .marquee-item:hover {
+      color: rgba(239, 190, 78, .4);
+    }
+
+    .marquee-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: .3;
+    }
+
+    /* ── Process timeline ── */
+    .process {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .timeline {
+      margin-top: 3rem;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 3rem 2rem;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.35rem;
+      top: .3rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: var(--black);
+      transition: all .3s;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: var(--gold);
+      box-shadow: 0 0 20px rgba(239, 190, 78, .3);
+    }
+
+    .timeline-step {
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: .4rem;
+    }
+
+    .timeline-item h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: .4rem;
+    }
+
+    .timeline-item p {
+      font-size: .85rem;
+      color: var(--gray);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid rgba(255, 255, 255, .04);
+      padding: 3rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      height: 22px;
+      opacity: .4;
+    }
+
+    .footer-text {
+      font-size: .72rem;
+      color: var(--gray);
+      letter-spacing: .05em;
+    }
+
+    /* ── Cursor glow (desktop) ── */
+    .cursor-glow {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(239, 190, 78, .04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity .3s;
+      display: none;
+    }
+
+    @media (hover: hover) {
+      .cursor-glow {
+        display: block;
+      }
+    }
+
+    /* ── Divider ── */
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+      margin: 0 auto;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- Cursor glow -->
-<div class="cursor-glow" id="cursorGlow"></div>
+  <!-- Cursor glow -->
+  <div class="cursor-glow" id="cursorGlow"></div>
 
-<!-- Navigation -->
-<nav class="nav" id="nav">
-  <img src="logo.svg" alt="AUVP Capital" class="nav-logo">
-  <div class="nav-links">
-    <a href="#about">Sobre</a>
-    <a href="#pillars">Pilares</a>
-    <a href="#activities">Atuação</a>
-    <a href="#connections">Conexões</a>
-    <a href="#leadership">Liderança</a>
-    <a href="#process">Processo</a>
-  </div>
-  <div class="menu-toggle" id="menuToggle">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
-
-<!-- Mobile menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#about" onclick="closeMenu()">Sobre</a>
-  <a href="#pillars" onclick="closeMenu()">Pilares</a>
-  <a href="#activities" onclick="closeMenu()">Atuação</a>
-  <a href="#connections" onclick="closeMenu()">Conexões</a>
-  <a href="#leadership" onclick="closeMenu()">Liderança</a>
-  <a href="#process" onclick="closeMenu()">Processo</a>
-</div>
-
-<!-- Hero -->
-<header class="hero">
-  <div class="hero-bg-glow"></div>
-  <div class="hero-lines"></div>
-  <div class="hero-badge">Departamento de Produto</div>
-  <h1>Criando o <em>futuro</em><br>da experiência</h1>
-  <p class="hero-sub">Onde visão estratégica encontra a necessidade do cliente — construindo produtos que transformam e encantam.</p>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
-</header>
-
-<!-- About -->
-<section id="about">
-  <div class="about">
-    <div class="reveal">
-      <div class="section-label">Quem somos</div>
-      <h2 class="section-title">Visão estratégica com <em>alma</em> de cliente</h2>
-      <p class="section-text">A área de Produto reúne a visão estratégica da empresa com as necessidades dos clientes, construindo produtos de sucesso com usuários apaixonados pelas nossas criações. Nosso foco é criar sempre o melhor produto, oferecendo soluções criativas para problemas reais da nossa comunidade.</p>
-      <br>
-      <p class="section-text">Para isso, formamos um time generalista e multidisciplinar que navega entre marketing, design, desenvolvimento, vendas, logística — e, é claro, tem como grande guia: os dados.</p>
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <img src="logo.svg" alt="AUVP Capital" class="nav-logo">
+    <div class="nav-links">
+      <a href="#about">Sobre</a>
+      <a href="#pillars">Pilares</a>
+      <a href="#activities">Atuação</a>
+      <a href="#connections">Conexões</a>
+      <a href="#leadership">Liderança</a>
+      <a href="#process">Processo</a>
     </div>
-    <div class="about-right reveal" style="transition-delay:.15s">
-      <div class="about-stat">
-        <div class="about-stat-label">Liderança da Área</div>
-        <div class="about-stat-value">Beatriz Henriques</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-label">Sócio Responsável</div>
-        <div class="about-stat-value">Raul Sena</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-label">Tamanho do Time</div>
-        <div class="about-stat-value">9 especialistas</div>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-label">Perfil do Time</div>
-        <div class="about-stat-value">Generalistas multidisciplinares</div>
-      </div>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span><span></span><span></span>
     </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMenu()">Sobre</a>
+    <a href="#pillars" onclick="closeMenu()">Pilares</a>
+    <a href="#activities" onclick="closeMenu()">Atuação</a>
+    <a href="#connections" onclick="closeMenu()">Conexões</a>
+    <a href="#leadership" onclick="closeMenu()">Liderança</a>
+    <a href="#process" onclick="closeMenu()">Processo</a>
   </div>
-</section>
 
-<div class="divider reveal"></div>
-
-<!-- Pillars -->
-<section id="pillars">
-  <div class="pillars">
-    <div class="reveal" style="text-align:center">
-      <div class="section-label" style="justify-content:center">Pilares</div>
-      <h2 class="section-title" style="max-width:600px;margin:0 auto">Os <em>pilares</em> que sustentam nossas entregas</h2>
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-bg-glow"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-badge">Departamento de Produto</div>
+    <h1>Criando o <em>futuro</em><br>da experiência</h1>
+    <p class="hero-sub">Onde visão estratégica encontra a necessidade do cliente — construindo produtos que transformam
+      e encantam.</p>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
     </div>
-    <div class="pillars-grid">
-      <div class="pillar-card reveal" onclick="togglePillar(this)">
-        <div class="pillar-icon">🔬</div>
-        <h3>Pesquisa & Dados</h3>
-        <p>Decisões baseadas em evidências, com pesquisas qualitativas, quantitativas e análise comportamental.</p>
-        <div class="pillar-detail">
-          <div class="pillar-detail-inner">Realizamos pesquisas profundas com clientes e leads, coletamos feedbacks continuamente e analisamos dados de uso e comportamento para gerar insights que direcionam a evolução dos nossos produtos.</div>
-        </div>
-        <div class="pillar-expand">
-          Explorar
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </div>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about">
+      <div class="reveal">
+        <div class="section-label">Quem somos</div>
+        <h2 class="section-title">Visão estratégica com <em>alma</em> de cliente</h2>
+        <p class="section-text">A área de Produto reúne a visão estratégica da empresa com as necessidades dos clientes,
+          construindo produtos de sucesso com usuários apaixonados pelas nossas criações. Nosso foco é criar sempre o
+          melhor produto, oferecendo soluções criativas para problemas reais da nossa comunidade.</p>
+        <br>
+        <p class="section-text">Para isso, formamos um time generalista e multidisciplinar que navega entre marketing,
+          design, desenvolvimento, vendas, logística — e, é claro, tem como grande guia: os dados.</p>
       </div>
-      <div class="pillar-card reveal" style="transition-delay:.1s" onclick="togglePillar(this)">
-        <div class="pillar-icon">✏️</div>
-        <h3>Design & Experiência</h3>
-        <p>Interfaces elegantes, fluxos intuitivos e consistência em todos os pontos de contato.</p>
-        <div class="pillar-detail">
-          <div class="pillar-detail-inner">Desenhamos wireframes, protótipos e interfaces finais que garantem uma experiência coesa e encantadora para cada usuário, cuidando de cada detalhe — do primeiro clique à última interação.</div>
+      <div class="about-right reveal" style="transition-delay:.15s">
+        <div class="about-stat">
+          <div class="about-stat-label">Liderança da Área</div>
+          <div class="about-stat-value">Beatriz Henriques</div>
         </div>
-        <div class="pillar-expand">
-          Explorar
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        <div class="about-stat">
+          <div class="about-stat-label">Sócio Responsável</div>
+          <div class="about-stat-value">Raul Sena</div>
         </div>
-      </div>
-      <div class="pillar-card reveal" style="transition-delay:.2s" onclick="togglePillar(this)">
-        <div class="pillar-icon">🚀</div>
-        <h3>Inovação & Mercado</h3>
-        <p>Monitoramento constante de tendências e ações de players para antecipar movimentos.</p>
-        <div class="pillar-detail">
-          <div class="pillar-detail-inner">Mantemos o radar ligado no mercado para acompanhar tendências, boas práticas e ações de outros players — garantindo que nossos produtos estejam sempre um passo à frente.</div>
+        <div class="about-stat">
+          <div class="about-stat-label">Tamanho do Time</div>
+          <div class="about-stat-value">9 especialistas</div>
         </div>
-        <div class="pillar-expand">
-          Explorar
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </div>
-      </div>
-      <div class="pillar-card reveal" style="transition-delay:.1s" onclick="togglePillar(this)">
-        <div class="pillar-icon">📋</div>
-        <h3>Backlog & Priorização</h3>
-        <p>Gestão contínua do backlog de produto com base em dados, feedback e visão estratégica.</p>
-        <div class="pillar-detail">
-          <div class="pillar-detail-inner">Desenvolvemos, priorizamos e refinamos o backlog de produto continuamente, equilibrando demandas do negócio com necessidades reais dos clientes para maximizar impacto.</div>
-        </div>
-        <div class="pillar-expand">
-          Explorar
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </div>
-      </div>
-      <div class="pillar-card reveal" style="transition-delay:.2s" onclick="togglePillar(this)">
-        <div class="pillar-icon">🎯</div>
-        <h3>Conteúdo & Comunicação</h3>
-        <p>Textos, roteiros, e-mails e materiais visuais com tom de voz alinhado à marca.</p>
-        <div class="pillar-detail">
-          <div class="pillar-detail-inner">Escrevemos e revisamos todos os conteúdos dos nossos produtos — de e-mails a páginas educativas — garantindo clareza, elegância e alinhamento com a identidade da marca.</div>
-        </div>
-        <div class="pillar-expand">
-          Explorar
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </div>
-      </div>
-      <div class="pillar-card reveal" style="transition-delay:.3s" onclick="togglePillar(this)">
-        <div class="pillar-icon">🤝</div>
-        <h3>Colaboração Cross</h3>
-        <p>Facilitamos a integração entre áreas para alinhamento e execução eficaz.</p>
-        <div class="pillar-detail">
-          <div class="pillar-detail-inner">Atuamos como ponte entre as diversas áreas da empresa, facilitando a colaboração e garantindo que todos os times estejam alinhados na direção estratégica e na execução dos projetos.</div>
-        </div>
-        <div class="pillar-expand">
-          Explorar
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        <div class="about-stat">
+          <div class="about-stat-label">Perfil do Time</div>
+          <div class="about-stat-value">Generalistas multidisciplinares</div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Activities -->
-<section id="activities">
-  <div class="activities">
-    <div class="reveal" style="text-align:center">
-      <div class="section-label" style="justify-content:center">Atuação</div>
-      <h2 class="section-title" style="max-width:600px;margin:0 auto">O que fazemos no <em>dia a dia</em></h2>
-    </div>
-    <div class="activity-list">
-      <div class="activity-item reveal" onclick="toggleActivity(this)">
-        <div class="activity-header">
-          <div class="activity-header-left">
-            <span class="activity-num">01</span>
-            <h4>Pesquisa com Clientes</h4>
+  <div class="divider reveal"></div>
+
+  <!-- Pillars -->
+  <section id="pillars">
+    <div class="pillars">
+      <div class="reveal" style="text-align:center">
+        <div class="section-label" style="justify-content:center">Pilares</div>
+        <h2 class="section-title" style="max-width:600px;margin:0 auto">Os <em>pilares</em> que sustentam nossas
+          entregas</h2>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar-card reveal" onclick="togglePillar(this)">
+          <div class="pillar-icon">🔬</div>
+          <h3>Pesquisa & Dados</h3>
+          <p>Decisões baseadas em evidências, com pesquisas qualitativas, quantitativas e análise comportamental.</p>
+          <div class="pillar-detail">
+            <div class="pillar-detail-inner">Realizamos pesquisas profundas com clientes e leads, coletamos feedbacks
+              continuamente e analisamos dados de uso e comportamento para gerar insights que direcionam a evolução dos
+              nossos produtos.</div>
           </div>
-          <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        </div>
-        <div class="activity-body"><div class="activity-body-inner">Realizamos pesquisas qualitativas e quantitativas com clientes e leads para entender profundamente suas dores, desejos e comportamentos — a base de tudo que construímos.</div></div>
-      </div>
-      <div class="activity-item reveal" onclick="toggleActivity(this)">
-        <div class="activity-header">
-          <div class="activity-header-left">
-            <span class="activity-num">02</span>
-            <h4>Design de Produto</h4>
+          <div class="pillar-expand">
+            Explorar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
           </div>
-          <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
         </div>
-        <div class="activity-body"><div class="activity-body-inner">Desenhamos fluxos, wireframes, protótipos e interfaces finais de produtos e serviços, garantindo a melhor experiência possível do início ao fim.</div></div>
-      </div>
-      <div class="activity-item reveal" onclick="toggleActivity(this)">
-        <div class="activity-header">
-          <div class="activity-header-left">
-            <span class="activity-num">03</span>
-            <h4>Redação & Tom de Voz</h4>
+        <div class="pillar-card reveal" style="transition-delay:.1s" onclick="togglePillar(this)">
+          <div class="pillar-icon">✏️</div>
+          <h3>Design & Experiência</h3>
+          <p>Interfaces elegantes, fluxos intuitivos e consistência em todos os pontos de contato.</p>
+          <div class="pillar-detail">
+            <div class="pillar-detail-inner">Desenhamos wireframes, protótipos e interfaces finais que garantem uma
+              experiência coesa e encantadora para cada usuário, cuidando de cada detalhe — do primeiro clique à última
+              interação.</div>
           </div>
-          <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        </div>
-        <div class="activity-body"><div class="activity-body-inner">Escrevemos e revisamos textos e comunicações com tom de voz alinhado à marca, garantindo consistência e clareza em cada ponto de contato.</div></div>
-      </div>
-      <div class="activity-item reveal" onclick="toggleActivity(this)">
-        <div class="activity-header">
-          <div class="activity-header-left">
-            <span class="activity-num">04</span>
-            <h4>Feedback & Melhoria Contínua</h4>
+          <div class="pillar-expand">
+            Explorar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
           </div>
-          <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
         </div>
-        <div class="activity-body"><div class="activity-body-inner">Coletamos feedbacks de usuários e participantes de forma estruturada, transformando-os em ações concretas de evolução para nossos produtos.</div></div>
-      </div>
-      <div class="activity-item reveal" onclick="toggleActivity(this)">
-        <div class="activity-header">
-          <div class="activity-header-left">
-            <span class="activity-num">05</span>
-            <h4>Análise de Dados & Insights</h4>
+        <div class="pillar-card reveal" style="transition-delay:.2s" onclick="togglePillar(this)">
+          <div class="pillar-icon">🚀</div>
+          <h3>Inovação & Mercado</h3>
+          <p>Monitoramento constante de tendências e ações de players para antecipar movimentos.</p>
+          <div class="pillar-detail">
+            <div class="pillar-detail-inner">Mantemos o radar ligado no mercado para acompanhar tendências, boas
+              práticas e ações de outros players — garantindo que nossos produtos estejam sempre um passo à frente.
+            </div>
           </div>
-          <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        </div>
-        <div class="activity-body"><div class="activity-body-inner">Analisamos dados de uso e comportamento para gerar insights de evolução, transformando números em decisões estratégicas de produto.</div></div>
-      </div>
-      <div class="activity-item reveal" onclick="toggleActivity(this)">
-        <div class="activity-header">
-          <div class="activity-header-left">
-            <span class="activity-num">06</span>
-            <h4>Materiais & Campanhas</h4>
+          <div class="pillar-expand">
+            Explorar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
           </div>
-          <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
         </div>
-        <div class="activity-body"><div class="activity-body-inner">Criamos apresentações, materiais visuais e conteúdos para eventos e campanhas, além de roteiros, e-mails, páginas e conteúdos educativos sobre os produtos.</div></div>
-      </div>
-      <div class="activity-item reveal" onclick="toggleActivity(this)">
-        <div class="activity-header">
-          <div class="activity-header-left">
-            <span class="activity-num">07</span>
-            <h4>Monitoramento de Mercado</h4>
+        <div class="pillar-card reveal" style="transition-delay:.1s" onclick="togglePillar(this)">
+          <div class="pillar-icon">📋</div>
+          <h3>Backlog & Priorização</h3>
+          <p>Gestão contínua do backlog de produto com base em dados, feedback e visão estratégica.</p>
+          <div class="pillar-detail">
+            <div class="pillar-detail-inner">Desenvolvemos, priorizamos e refinamos o backlog de produto continuamente,
+              equilibrando demandas do negócio com necessidades reais dos clientes para maximizar impacto.</div>
           </div>
-          <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+          <div class="pillar-expand">
+            Explorar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
         </div>
-        <div class="activity-body"><div class="activity-body-inner">Monitoramos tendências e boas práticas de mercado em produtos, design, eventos e conteúdo — mantendo nosso radar sempre ligado no que há de mais relevante.</div></div>
+        <div class="pillar-card reveal" style="transition-delay:.2s" onclick="togglePillar(this)">
+          <div class="pillar-icon">🎯</div>
+          <h3>Conteúdo & Comunicação</h3>
+          <p>Textos, roteiros, e-mails e materiais visuais com tom de voz alinhado à marca.</p>
+          <div class="pillar-detail">
+            <div class="pillar-detail-inner">Escrevemos e revisamos todos os conteúdos dos nossos produtos — de e-mails
+              a páginas educativas — garantindo clareza, elegância e alinhamento com a identidade da marca.</div>
+          </div>
+          <div class="pillar-expand">
+            Explorar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
+        </div>
+        <div class="pillar-card reveal" style="transition-delay:.3s" onclick="togglePillar(this)">
+          <div class="pillar-icon">🤝</div>
+          <h3>Colaboração Cross</h3>
+          <p>Facilitamos a integração entre áreas para alinhamento e execução eficaz.</p>
+          <div class="pillar-detail">
+            <div class="pillar-detail-inner">Atuamos como ponte entre as diversas áreas da empresa, facilitando a
+              colaboração e garantindo que todos os times estejam alinhados na direção estratégica e na execução dos
+              projetos.</div>
+          </div>
+          <div class="pillar-expand">
+            Explorar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Activities -->
+  <section id="activities">
+    <div class="activities">
+      <div class="reveal" style="text-align:center">
+        <div class="section-label" style="justify-content:center">Atuação</div>
+        <h2 class="section-title" style="max-width:600px;margin:0 auto">O que fazemos no <em>dia a dia</em></h2>
+      </div>
+      <div class="activity-list">
+        <div class="activity-item reveal" onclick="toggleActivity(this)">
+          <div class="activity-header">
+            <div class="activity-header-left">
+              <span class="activity-num">01</span>
+              <h4>Pesquisa com Clientes</h4>
+            </div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14" />
+              </svg></div>
+          </div>
+          <div class="activity-body">
+            <div class="activity-body-inner">Realizamos pesquisas qualitativas e quantitativas com clientes e leads para
+              entender profundamente suas dores, desejos e comportamentos — a base de tudo que construímos.</div>
+          </div>
+        </div>
+        <div class="activity-item reveal" onclick="toggleActivity(this)">
+          <div class="activity-header">
+            <div class="activity-header-left">
+              <span class="activity-num">02</span>
+              <h4>Design de Produto</h4>
+            </div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14" />
+              </svg></div>
+          </div>
+          <div class="activity-body">
+            <div class="activity-body-inner">Desenhamos fluxos, wireframes, protótipos e interfaces finais de produtos e
+              serviços, garantindo a melhor experiência possível do início ao fim.</div>
+          </div>
+        </div>
+        <div class="activity-item reveal" onclick="toggleActivity(this)">
+          <div class="activity-header">
+            <div class="activity-header-left">
+              <span class="activity-num">03</span>
+              <h4>Redação & Tom de Voz</h4>
+            </div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14" />
+              </svg></div>
+          </div>
+          <div class="activity-body">
+            <div class="activity-body-inner">Escrevemos e revisamos textos e comunicações com tom de voz alinhado à
+              marca, garantindo consistência e clareza em cada ponto de contato.</div>
+          </div>
+        </div>
+        <div class="activity-item reveal" onclick="toggleActivity(this)">
+          <div class="activity-header">
+            <div class="activity-header-left">
+              <span class="activity-num">04</span>
+              <h4>Feedback & Melhoria Contínua</h4>
+            </div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14" />
+              </svg></div>
+          </div>
+          <div class="activity-body">
+            <div class="activity-body-inner">Coletamos feedbacks de usuários e participantes de forma estruturada,
+              transformando-os em ações concretas de evolução para nossos produtos.</div>
+          </div>
+        </div>
+        <div class="activity-item reveal" onclick="toggleActivity(this)">
+          <div class="activity-header">
+            <div class="activity-header-left">
+              <span class="activity-num">05</span>
+              <h4>Análise de Dados & Insights</h4>
+            </div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14" />
+              </svg></div>
+          </div>
+          <div class="activity-body">
+            <div class="activity-body-inner">Analisamos dados de uso e comportamento para gerar insights de evolução,
+              transformando números em decisões estratégicas de produto.</div>
+          </div>
+        </div>
+        <div class="activity-item reveal" onclick="toggleActivity(this)">
+          <div class="activity-header">
+            <div class="activity-header-left">
+              <span class="activity-num">06</span>
+              <h4>Materiais & Campanhas</h4>
+            </div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14" />
+              </svg></div>
+          </div>
+          <div class="activity-body">
+            <div class="activity-body-inner">Criamos apresentações, materiais visuais e conteúdos para eventos e
+              campanhas, além de roteiros, e-mails, páginas e conteúdos educativos sobre os produtos.</div>
+          </div>
+        </div>
+        <div class="activity-item reveal" onclick="toggleActivity(this)">
+          <div class="activity-header">
+            <div class="activity-header-left">
+              <span class="activity-num">07</span>
+              <h4>Monitoramento de Mercado</h4>
+            </div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14" />
+              </svg></div>
+          </div>
+          <div class="activity-body">
+            <div class="activity-body-inner">Monitoramos tendências e boas práticas de mercado em produtos, design,
+              eventos e conteúdo — mantendo nosso radar sempre ligado no que há de mais relevante.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider reveal"></div>
+
+  <!-- Connections -->
+  <section id="connections">
+    <div class="connections">
+      <div class="reveal">
+        <div class="section-label" style="justify-content:center">Conexões</div>
+        <h2 class="section-title">A <em>rede</em> que nos conecta</h2>
+        <p class="section-text" style="margin:0 auto">Produto é o hub que une diferentes áreas, garantindo alinhamento e
+          execução eficaz em toda a empresa.</p>
+      </div>
+      <div class="orbit-container reveal" style="transition-delay:.15s">
+        <div class="orbit-ring orbit-ring-1"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-center">Produto</div>
+        <!-- Nodes positioned via JS -->
+        <div class="orbit-node" data-area="Atendimento"
+          style="--tx:-130px;--ty:-130px;transform:translate(-130px,-130px)">
+          <span class="orbit-node-icon">💬</span>
+          <span class="orbit-node-label">Atendimento</span>
+        </div>
+        <div class="orbit-node" data-area="Audiovisual"
+          style="--tx:130px;--ty:-130px;transform:translate(130px,-130px)">
+          <span class="orbit-node-icon">🎬</span>
+          <span class="orbit-node-label">Audiovisual</span>
+        </div>
+        <div class="orbit-node" data-area="Vendas" style="--tx:175px;--ty:0px;transform:translate(175px,0px)">
+          <span class="orbit-node-icon">📈</span>
+          <span class="orbit-node-label">Vendas</span>
+        </div>
+        <div class="orbit-node" data-area="Tecnologia" style="--tx:130px;--ty:130px;transform:translate(130px,130px)">
+          <span class="orbit-node-icon">⚡</span>
+          <span class="orbit-node-label">Tecnologia</span>
+        </div>
+        <div class="orbit-node" data-area="Marketing" style="--tx:-130px;--ty:130px;transform:translate(-130px,130px)">
+          <span class="orbit-node-icon">📢</span>
+          <span class="orbit-node-label">Marketing</span>
+        </div>
+        <div class="orbit-node" data-area="Controladoria" style="--tx:-175px;--ty:0px;transform:translate(-175px,0px)">
+          <span class="orbit-node-icon">📊</span>
+          <span class="orbit-node-label">Controladoria</span>
+        </div>
+        <div class="orbit-node" data-area="Financeiro" style="--tx:0px;--ty:175px;transform:translate(0px,175px)">
+          <span class="orbit-node-icon">🏦</span>
+          <span class="orbit-node-label">Financeiro</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values marquee -->
+  <div class="values-section">
+    <div class="marquee-track" id="marquee">
+      <span class="marquee-item"><span class="marquee-dot"></span>Inovação</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Dados</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Experiência</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Estratégia</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Criatividade</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Colaboração</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Excelência</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Visão</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="marquee-item"><span class="marquee-dot"></span>Inovação</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Dados</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Experiência</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Estratégia</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Criatividade</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Colaboração</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Excelência</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Visão</span>
     </div>
   </div>
-</section>
 
-<div class="divider reveal"></div>
-
-<!-- Connections -->
-<section id="connections">
-  <div class="connections">
-    <div class="reveal">
-      <div class="section-label" style="justify-content:center">Conexões</div>
-      <h2 class="section-title">A <em>rede</em> que nos conecta</h2>
-      <p class="section-text" style="margin:0 auto">Produto é o hub que une diferentes áreas, garantindo alinhamento e execução eficaz em toda a empresa.</p>
-    </div>
-    <div class="orbit-container reveal" style="transition-delay:.15s">
-      <div class="orbit-ring orbit-ring-1"></div>
-      <div class="orbit-ring orbit-ring-2"></div>
-      <div class="orbit-center">Produto</div>
-      <!-- Nodes positioned via JS -->
-      <div class="orbit-node" data-area="Atendimento" style="--tx:-130px;--ty:-130px;transform:translate(-130px,-130px)">
-        <span class="orbit-node-icon">💬</span>
-        <span class="orbit-node-label">Atendimento</span>
+  <!-- Leadership -->
+  <section id="leadership">
+    <div class="leadership">
+      <div class="reveal" style="text-align:center">
+        <div class="section-label" style="justify-content:center">Liderança</div>
+        <h2 class="section-title">Quem <em>lidera</em> o time</h2>
       </div>
-      <div class="orbit-node" data-area="Audiovisual" style="--tx:130px;--ty:-130px;transform:translate(130px,-130px)">
-        <span class="orbit-node-icon">🎬</span>
-        <span class="orbit-node-label">Audiovisual</span>
-      </div>
-      <div class="orbit-node" data-area="Vendas" style="--tx:175px;--ty:0px;transform:translate(175px,0px)">
-        <span class="orbit-node-icon">📈</span>
-        <span class="orbit-node-label">Vendas</span>
-      </div>
-      <div class="orbit-node" data-area="Tecnologia" style="--tx:130px;--ty:130px;transform:translate(130px,130px)">
-        <span class="orbit-node-icon">⚡</span>
-        <span class="orbit-node-label">Tecnologia</span>
-      </div>
-      <div class="orbit-node" data-area="Marketing" style="--tx:-130px;--ty:130px;transform:translate(-130px,130px)">
-        <span class="orbit-node-icon">📢</span>
-        <span class="orbit-node-label">Marketing</span>
-      </div>
-      <div class="orbit-node" data-area="Controladoria" style="--tx:-175px;--ty:0px;transform:translate(-175px,0px)">
-        <span class="orbit-node-icon">📊</span>
-        <span class="orbit-node-label">Controladoria</span>
-      </div>
-      <div class="orbit-node" data-area="Financeiro" style="--tx:0px;--ty:175px;transform:translate(0px,175px)">
-        <span class="orbit-node-icon">🏦</span>
-        <span class="orbit-node-label">Financeiro</span>
+      <div class="leader-cards">
+        <div class="leader-card reveal">
+          <div class="leader-role">Sócio Responsável</div>
+          <div class="leader-name">Raul Sena</div>
+          <p class="leader-desc">Responsável pela visão estratégica e direcionamento macro do departamento de Produto
+            dentro do negócio.</p>
+        </div>
+        <div class="leader-card reveal" style="transition-delay:.1s">
+          <div class="leader-role">Diretora da Área</div>
+          <div class="leader-name">Beatriz Henriques</div>
+          <p class="leader-desc">Lidera o time de 9 especialistas, conectando estratégia, execução e inovação no dia a
+            dia da área de Produto.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Values marquee -->
-<div class="values-section">
-  <div class="marquee-track" id="marquee">
-    <span class="marquee-item"><span class="marquee-dot"></span>Inovação</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Dados</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Experiência</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Estratégia</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Criatividade</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Colaboração</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Excelência</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Visão</span>
-    <!-- Duplicate for seamless loop -->
-    <span class="marquee-item"><span class="marquee-dot"></span>Inovação</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Dados</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Experiência</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Estratégia</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Criatividade</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Colaboração</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Excelência</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Visão</span>
-  </div>
-</div>
+  <div class="divider reveal"></div>
 
-<!-- Leadership -->
-<section id="leadership">
-  <div class="leadership">
-    <div class="reveal" style="text-align:center">
-      <div class="section-label" style="justify-content:center">Liderança</div>
-      <h2 class="section-title">Quem <em>lidera</em> o time</h2>
-    </div>
-    <div class="leader-cards">
-      <div class="leader-card reveal">
-        <div class="leader-role">Sócio Responsável</div>
-        <div class="leader-name">Raul Sena</div>
-        <p class="leader-desc">Responsável pela visão estratégica e direcionamento macro do departamento de Produto dentro do negócio.</p>
+  <!-- Process -->
+  <section id="process">
+    <div class="process">
+      <div class="reveal" style="text-align:center">
+        <div class="section-label" style="justify-content:center">Processo</div>
+        <h2 class="section-title">Como a <em>mágica</em> acontece</h2>
+        <p class="section-text" style="margin:0 auto">Do insight ao produto finalizado — nosso processo combina dados,
+          criatividade e execução rigorosa.</p>
       </div>
-      <div class="leader-card reveal" style="transition-delay:.1s">
-        <div class="leader-role">Diretora da Área</div>
-        <div class="leader-name">Beatriz Henriques</div>
-        <p class="leader-desc">Lidera o time de 9 especialistas, conectando estratégia, execução e inovação no dia a dia da área de Produto.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider reveal"></div>
-
-<!-- Process -->
-<section id="process">
-  <div class="process">
-    <div class="reveal" style="text-align:center">
-      <div class="section-label" style="justify-content:center">Processo</div>
-      <h2 class="section-title">Como a <em>mágica</em> acontece</h2>
-      <p class="section-text" style="margin:0 auto">Do insight ao produto finalizado — nosso processo combina dados, criatividade e execução rigorosa.</p>
-    </div>
-    <div class="timeline" style="margin-top:3rem">
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-step">Fase 01</div>
-        <h4>Descoberta & Pesquisa</h4>
-        <p>Mergulhamos no universo do cliente com pesquisas qualitativas e quantitativas, coletando feedbacks e mapeando necessidades reais.</p>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-step">Fase 02</div>
-        <h4>Análise & Estratégia</h4>
-        <p>Transformamos dados em insights acionáveis, definindo prioridades no backlog e alinhando a visão estratégica da empresa.</p>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-step">Fase 03</div>
-        <h4>Design & Prototipação</h4>
-        <p>Criamos fluxos, wireframes e protótipos iterativos, testando cada hipótese antes de partir para a construção final.</p>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-step">Fase 04</div>
-        <h4>Construção & Colaboração</h4>
-        <p>Trabalhamos lado a lado com Tecnologia, Marketing e outras áreas para dar vida ao produto com qualidade e alinhamento.</p>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="timeline-dot"></div>
-        <div class="timeline-step">Fase 05</div>
-        <h4>Lançamento & Evolução</h4>
-        <p>Lançamos, medimos, aprendemos e refinamos continuamente — garantindo que cada entrega evolua com base em dados reais.</p>
+      <div class="timeline" style="margin-top:3rem">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-step">Fase 01</div>
+          <h4>Descoberta & Pesquisa</h4>
+          <p>Mergulhamos no universo do cliente com pesquisas qualitativas e quantitativas, coletando feedbacks e
+            mapeando necessidades reais.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-step">Fase 02</div>
+          <h4>Análise & Estratégia</h4>
+          <p>Transformamos dados em insights acionáveis, definindo prioridades no backlog e alinhando a visão
+            estratégica da empresa.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-step">Fase 03</div>
+          <h4>Design & Prototipação</h4>
+          <p>Criamos fluxos, wireframes e protótipos iterativos, testando cada hipótese antes de partir para a
+            construção final.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-step">Fase 04</div>
+          <h4>Construção & Colaboração</h4>
+          <p>Trabalhamos lado a lado com Tecnologia, Marketing e outras áreas para dar vida ao produto com qualidade e
+            alinhamento.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-step">Fase 05</div>
+          <h4>Lançamento & Evolução</h4>
+          <p>Lançamos, medimos, aprendemos e refinamos continuamente — garantindo que cada entrega evolua com base em
+            dados reais.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Footer -->
-<footer class="footer">
-  <img src="logo.svg" alt="AUVP Capital" class="footer-logo">
-  <span class="footer-text">Departamento de Produto — AUVP Capital</span>
-</footer>
+  <!-- Footer -->
+  <footer class="footer">
+    <img src="logo.svg" alt="AUVP Capital" class="footer-logo">
+    <span class="footer-text">Orgulhosamente feito sob o sol escaldante de Goiás</span>
+  </footer>
 
-<script>
-// ── Nav scroll effect ──
-const nav = document.getElementById('nav');
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
+  <script>
+    // ── Nav scroll effect ──
+    const nav = document.getElementById('nav');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
 
-// ── Mobile menu ──
-const menuToggle = document.getElementById('menuToggle');
-const mobileMenu = document.getElementById('mobileMenu');
-menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('active');
-  mobileMenu.classList.toggle('open');
-  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-});
-function closeMenu() {
-  menuToggle.classList.remove('active');
-  mobileMenu.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// ── Reveal on scroll ──
-const revealEls = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
+    // ── Mobile menu ──
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    function closeMenu() {
+      menuToggle.classList.remove('active');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
     }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-revealEls.forEach(el => observer.observe(el));
 
-// ── Pillar card expand ──
-function togglePillar(card) {
-  const wasExpanded = card.classList.contains('expanded');
-  document.querySelectorAll('.pillar-card.expanded').forEach(c => c.classList.remove('expanded'));
-  if (!wasExpanded) card.classList.add('expanded');
-}
+    // ── Reveal on scroll ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => observer.observe(el));
 
-// ── Activity accordion ──
-function toggleActivity(item) {
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.activity-item.open').forEach(i => {
-    i.classList.remove('open');
-    i.querySelector('.activity-body').style.maxHeight = '0';
-  });
-  if (!wasOpen) {
-    item.classList.add('open');
-    const body = item.querySelector('.activity-body');
-    body.style.maxHeight = body.scrollHeight + 'px';
-  }
-}
-
-// ── Cursor glow (desktop) ──
-const glow = document.getElementById('cursorGlow');
-if (window.matchMedia('(hover: hover)').matches) {
-  document.addEventListener('mousemove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
-  }, { passive: true });
-}
-
-// ── Smooth anchor scroll ──
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // ── Pillar card expand ──
+    function togglePillar(card) {
+      const wasExpanded = card.classList.contains('expanded');
+      document.querySelectorAll('.pillar-card.expanded').forEach(c => c.classList.remove('expanded'));
+      if (!wasExpanded) card.classList.add('expanded');
     }
-  });
-});
-</script>
+
+    // ── Activity accordion ──
+    function toggleActivity(item) {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.activity-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.activity-body').style.maxHeight = '0';
+      });
+      if (!wasOpen) {
+        item.classList.add('open');
+        const body = item.querySelector('.activity-body');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    }
+
+    // ── Cursor glow (desktop) ──
+    const glow = document.getElementById('cursorGlow');
+    if (window.matchMedia('(hover: hover)').matches) {
+      document.addEventListener('mousemove', e => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      }, { passive: true });
+    }
+
+    // ── Smooth anchor scroll ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 </body>
+
 </html>
