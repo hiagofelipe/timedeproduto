@@ -941,6 +941,134 @@
       }
     }
 
+    /* ── Team (Quem somos) ── */
+    .team-list {
+      max-width: 900px;
+      margin: 3rem auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .team-member {
+      border: 1px solid rgba(255, 255, 255, .04);
+      border-radius: 12px;
+      background: var(--dark-card);
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+
+    .team-member:hover {
+      border-color: rgba(239, 190, 78, .1);
+    }
+
+    .team-member-header {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      gap: 1rem;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .team-member-header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .team-member-photo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 1.5px solid rgba(239, 190, 78, .2);
+      flex-shrink: 0;
+    }
+
+    .team-member-info {
+      display: flex;
+      flex-direction: column;
+      gap: .2rem;
+    }
+
+    .team-member-name {
+      font-size: .95rem;
+      font-weight: 500;
+      transition: color .3s;
+    }
+
+    .team-member:hover .team-member-name {
+      color: var(--gold-light);
+    }
+
+    .team-member-role {
+      font-size: .75rem;
+      color: var(--gold-dark);
+      font-weight: 500;
+      letter-spacing: .04em;
+    }
+
+    .team-member-toggle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .3s;
+      flex-shrink: 0;
+    }
+
+    .team-member:hover .team-member-toggle {
+      border-color: rgba(239, 190, 78, .2);
+    }
+
+    .team-member.open .team-member-toggle {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .team-member-toggle svg {
+      width: 12px;
+      height: 12px;
+      stroke: var(--gray);
+      transition: all .3s;
+    }
+
+    .team-member.open .team-member-toggle svg {
+      stroke: var(--black);
+      transform: rotate(45deg);
+    }
+
+    .team-member-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .5s cubic-bezier(.23, 1, .32, 1);
+    }
+
+    .team-member-body-inner {
+      padding: 0 1.5rem 1.25rem 5.75rem;
+      font-size: .85rem;
+      color: var(--gray-light);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    @media (max-width: 480px) {
+      .team-member-photo {
+        width: 44px;
+        height: 44px;
+      }
+
+      .team-member-body-inner {
+        padding-left: 1.5rem;
+      }
+    }
+
     /* ── Values marquee ── */
     .values-section {
       padding: clamp(3rem, 8vw, 6rem) 0;
@@ -1489,26 +1617,231 @@
     </div>
   </div>
 
-  <!-- Leadership -->
+  <!-- Quem somos -->
   <section id="leadership">
     <div class="leadership">
       <div class="reveal" style="text-align:center">
-        <div class="section-label" style="justify-content:center">Liderança</div>
-        <h2 class="section-title">Quem <em>lidera</em> o time</h2>
+        <div class="section-label" style="justify-content:center">Quem somos</div>
+        <h2 class="section-title">Conheça o <em>time</em></h2>
       </div>
-      <div class="leader-cards">
-        <div class="leader-card reveal">
-          <div class="leader-role">Sócio Responsável</div>
-          <div class="leader-name">Raul Sena</div>
-          <p class="leader-desc">Responsável pela visão estratégica e direcionamento macro do departamento de Produto
-            dentro do negócio.</p>
+      <div class="team-list">
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="beatrizhenriques.jpg" alt="Beatriz Henriques" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Beatriz Henriques</span>
+                <span class="team-member-role">Diretora de Produto</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
         </div>
-        <div class="leader-card reveal" style="transition-delay:.1s">
-          <div class="leader-role">Diretora da Área</div>
-          <div class="leader-name">Beatriz Henriques</div>
-          <p class="leader-desc">Lidera o time de 9 especialistas, conectando estratégia, execução e inovação no dia a
-            dia da área de Produto.</p>
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="danielmachado.jpg" alt="Daniel Machado" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Daniel Machado</span>
+                <span class="team-member-role">Consultor de Produto</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
         </div>
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="ariadnecarneiro.jpg" alt="Ariadne Carneiro" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Ariadne Carneiro</span>
+                <span class="team-member-role">Product Manager</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
+        </div>
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="deborasanders.jpg" alt="Debora Sanders" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Debora Sanders</span>
+                <span class="team-member-role">Analista de Produto</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
+        </div>
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="elanerodrigues.jpg" alt="Elane Rodrigues" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Elane Rodrigues</span>
+                <span class="team-member-role">Analista de Produto</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
+        </div>
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="jeniffernascimento.jpg" alt="Jeniffer Nascimento" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Jeniffer Nascimento</span>
+                <span class="team-member-role">Analista de Produto</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
+        </div>
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="armandoneto.jpg" alt="Armando Neto" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Armando Neto</span>
+                <span class="team-member-role">Designer de Produtos</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
+        </div>
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="eriaalencar.jpg" alt="Éria Alencar" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Éria Alencar</span>
+                <span class="team-member-role">Designer de Produtos</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
+        </div>
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="joaopauloala.jpg" alt="João Paulo Ala" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">João Paulo Ala</span>
+                <span class="team-member-role">Analista de Logística</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
+        </div>
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="mateusgraff.jpg" alt="Mateus Graff" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Mateus Graff</span>
+                <span class="team-member-role">Redator</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
+        </div>
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="hiagofelipe.jpg" alt="Hiago Felipe" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Hiago Felipe</span>
+                <span class="team-member-role">Assistente de Produto</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
+        </div>
+
+        <div class="team-member reveal" onclick="toggleMember(this)">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="anabeatriz.jpg" alt="Ana Beatriz" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Ana Beatriz</span>
+                <span class="team-member-role">Assistente de Produto</span>
+              </div>
+            </div>
+            <div class="team-member-toggle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+          </div>
+          <div class="team-member-body">
+            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso mesmo, depois eu corrijo a copy direto no código.</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1620,6 +1953,20 @@
       if (!wasOpen) {
         item.classList.add('open');
         const body = item.querySelector('.activity-body');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    }
+
+    // ── Team member expand ──
+    function toggleMember(item) {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.team-member.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.team-member-body').style.maxHeight = '0';
+      });
+      if (!wasOpen) {
+        item.classList.add('open');
+        const body = item.querySelector('.team-member-body');
         body.style.maxHeight = body.scrollHeight + 'px';
       }
     }
