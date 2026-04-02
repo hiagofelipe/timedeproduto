@@ -956,22 +956,17 @@
       background: var(--dark-card);
       overflow: hidden;
       transition: border-color .3s;
-      position: relative;
     }
 
     .team-member:hover {
-      border-color: rgba(239, 190, 78, .1);
+      border-color: rgba(239, 190, 78, .15);
     }
 
     .team-member-header {
       padding: 1.25rem 1.5rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
       gap: 1rem;
-      -webkit-tap-highlight-color: transparent;
-      transition: padding .45s cubic-bezier(.23, 1, .32, 1);
     }
 
     .team-member-header-left {
@@ -988,10 +983,13 @@
       object-position: center top;
       border: 1.5px solid rgba(239, 190, 78, .2);
       flex-shrink: 0;
-      transition: width .45s cubic-bezier(.23, 1, .32, 1),
-        height .45s cubic-bezier(.23, 1, .32, 1),
-        border-color .35s,
-        border-width .35s;
+      transition: border-color .3s, transform .3s cubic-bezier(.23, 1, .32, 1);
+    }
+
+    .team-member:hover .team-member-photo,
+    .team-member:active .team-member-photo {
+      border-color: rgba(239, 190, 78, .55);
+      transform: scale(1.06);
     }
 
     .team-member-info {
@@ -1006,7 +1004,8 @@
       transition: color .3s;
     }
 
-    .team-member:hover .team-member-name {
+    .team-member:hover .team-member-name,
+    .team-member:active .team-member-name {
       color: var(--gold-light);
     }
 
@@ -1017,116 +1016,11 @@
       letter-spacing: .04em;
     }
 
-    .team-member-toggle {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, .1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all .3s;
-      flex-shrink: 0;
-    }
-
-    .team-member:hover .team-member-toggle {
-      border-color: rgba(239, 190, 78, .2);
-    }
-
-    .team-member.open .team-member-toggle {
-      background: var(--gold);
-      border-color: var(--gold);
-    }
-
-    .team-member-toggle svg {
-      width: 12px;
-      height: 12px;
-      stroke: var(--gray);
-      transition: all .3s;
-    }
-
-    .team-member.open .team-member-toggle svg {
-      stroke: var(--black);
-      transform: rotate(45deg);
-    }
-
-    .team-member-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .5s cubic-bezier(.23, 1, .32, 1);
-    }
-
-    .team-member-body-inner {
-      padding: 0 1.5rem 1.25rem 5.75rem;
-      font-size: .85rem;
-      color: var(--gray-light);
-      line-height: 1.7;
-      font-weight: 300;
-    }
-
     @media (max-width: 480px) {
       .team-member-photo {
         width: 44px;
         height: 44px;
       }
-
-      .team-member-body-inner {
-        padding-left: 1.5rem;
-      }
-    }
-
-    /* ── Team member expanded state ── */
-    .team-member.open {
-      border-color: rgba(239, 190, 78, .18);
-    }
-
-    .team-member.open .team-member-header {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1.5rem 1rem;
-      gap: .75rem;
-    }
-
-    .team-member.open .team-member-header-left {
-      flex-direction: column;
-      align-items: center;
-      gap: .85rem;
-      width: 100%;
-    }
-
-    .team-member.open .team-member-photo {
-      width: 100px;
-      height: 100px;
-      border-color: rgba(239, 190, 78, .5);
-      border-width: 2px;
-    }
-
-    .team-member.open .team-member-info {
-      align-items: center;
-      text-align: center;
-    }
-
-    .team-member.open .team-member-name {
-      font-size: 1.05rem;
-    }
-
-    .team-member.open .team-member-toggle {
-      position: absolute;
-      top: .85rem;
-      right: .85rem;
-      background: rgba(239, 190, 78, .06);
-      border-color: rgba(239, 190, 78, .18);
-    }
-
-    .team-member.open .team-member-toggle svg {
-      stroke: var(--gold-dark);
-      transform: rotate(45deg);
-    }
-
-    .team-member.open .team-member-body-inner {
-      padding: 0 2rem 1.75rem;
-      text-align: center;
     }
 
     /* ── Values marquee ── */
@@ -1353,7 +1247,19 @@
       </div>
       <div class="team-list">
 
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
+        <div class="team-member reveal">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="raulsena.png" alt="Raul Sena" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Raul Sena</span>
+                <span class="team-member-role">Sócio Responsável</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-member reveal">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="beatrizhenriques.jpg" alt="Beatriz Henriques" class="team-member-photo">
@@ -1362,19 +1268,10 @@
                 <span class="team-member-role">Diretora de Produto</span>
               </div>
             </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
+        <div class="team-member reveal">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="danielmachado.jpg" alt="Daniel Machado" class="team-member-photo">
@@ -1383,19 +1280,22 @@
                 <span class="team-member-role">Consultor de Produto</span>
               </div>
             </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
+        <div class="team-member reveal">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="anabeatriz.jpg" alt="Ana Beatriz Melo" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Ana Beatriz Melo</span>
+                <span class="team-member-role">Assistente de Produto</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-member reveal">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="ariadnecarneiro.jpg" alt="Ariadne Carneiro" class="team-member-photo">
@@ -1404,82 +1304,10 @@
                 <span class="team-member-role">Product Manager</span>
               </div>
             </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
-          <div class="team-member-header">
-            <div class="team-member-header-left">
-              <img src="deborasanders.jpg" alt="Debora Sanders" class="team-member-photo">
-              <div class="team-member-info">
-                <span class="team-member-name">Debora Sanders</span>
-                <span class="team-member-role">Analista de Produto</span>
-              </div>
-            </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
-          </div>
-        </div>
-
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
-          <div class="team-member-header">
-            <div class="team-member-header-left">
-              <img src="elanerodrigues.jpg" alt="Elane Rodrigues" class="team-member-photo">
-              <div class="team-member-info">
-                <span class="team-member-name">Elane Rodrigues</span>
-                <span class="team-member-role">Analista de Produto</span>
-              </div>
-            </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
-          </div>
-        </div>
-
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
-          <div class="team-member-header">
-            <div class="team-member-header-left">
-              <img src="jeniffernascimento.jpg" alt="Jeniffer Nascimento" class="team-member-photo">
-              <div class="team-member-info">
-                <span class="team-member-name">Jeniffer Nascimento</span>
-                <span class="team-member-role">Analista de Produto</span>
-              </div>
-            </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
-          </div>
-        </div>
-
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
+        <div class="team-member reveal">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="armandoneto.jpg" alt="Armando Neto" class="team-member-photo">
@@ -1488,19 +1316,34 @@
                 <span class="team-member-role">Designer de Produtos</span>
               </div>
             </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
+        <div class="team-member reveal">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="deborasanders.jpg" alt="Debora Sanders" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Debora Sanders</span>
+                <span class="team-member-role">Analista de Produto</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-member reveal">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="elanerodrigues.jpg" alt="Elane Rodrigues" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Elane Rodrigues</span>
+                <span class="team-member-role">Analista de Produto</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-member reveal">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="eriaalencar.jpg" alt="Éria Alencar" class="team-member-photo">
@@ -1509,19 +1352,22 @@
                 <span class="team-member-role">Designer de Produtos</span>
               </div>
             </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
+        <div class="team-member reveal">
+          <div class="team-member-header">
+            <div class="team-member-header-left">
+              <img src="jeniffernascimento.jpg" alt="Jeniffer Nascimento" class="team-member-photo">
+              <div class="team-member-info">
+                <span class="team-member-name">Jeniffer Nascimento</span>
+                <span class="team-member-role">Analista de Produto</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-member reveal">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="joaopauloala.jpg" alt="João Paulo Ala" class="team-member-photo">
@@ -1530,78 +1376,18 @@
                 <span class="team-member-role">Analista de Logística</span>
               </div>
             </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
+        <div class="team-member reveal">
           <div class="team-member-header">
             <div class="team-member-header-left">
-              <img src="mateusgraff.jpg" alt="Mateus Graff" class="team-member-photo">
+              <img src="hiagofelipe.jpg" alt="Hiago Felipe Sousa" class="team-member-photo">
               <div class="team-member-info">
-                <span class="team-member-name">Mateus Graff</span>
-                <span class="team-member-role">Redator</span>
-              </div>
-            </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
-          </div>
-        </div>
-
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
-          <div class="team-member-header">
-            <div class="team-member-header-left">
-              <img src="hiagofelipe.jpg" alt="Hiago Felipe" class="team-member-photo">
-              <div class="team-member-info">
-                <span class="team-member-name">Hiago Felipe</span>
+                <span class="team-member-name">Hiago Felipe Sousa</span>
                 <span class="team-member-role">Assistente de Produto</span>
               </div>
             </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
-          </div>
-        </div>
-
-        <div class="team-member reveal" onclick="toggleMember(this, event)">
-          <div class="team-member-header">
-            <div class="team-member-header-left">
-              <img src="anabeatriz.jpg" alt="Ana Beatriz" class="team-member-photo">
-              <div class="team-member-info">
-                <span class="team-member-name">Ana Beatriz</span>
-                <span class="team-member-role">Assistente de Produto</span>
-              </div>
-            </div>
-            <div class="team-member-toggle">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </div>
-          </div>
-          <div class="team-member-body">
-            <div class="team-member-body-inner">Colocando apenas para deixar um texto aqui, pode colocar exatamente isso
-              mesmo, depois eu corrijo a copy direto no código.</div>
           </div>
         </div>
 
@@ -2048,28 +1834,6 @@
         body.style.maxHeight = body.scrollHeight + 'px';
       }
     }
-
-    // ── Team member expand ──
-    function toggleMember(item, e) {
-      e.stopPropagation();
-      const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.team-member.open').forEach(i => {
-        i.classList.remove('open');
-        i.querySelector('.team-member-body').style.maxHeight = '0';
-      });
-      if (!wasOpen) {
-        item.classList.add('open');
-        const body = item.querySelector('.team-member-body');
-        body.style.maxHeight = body.scrollHeight + 'px';
-      }
-    }
-
-    document.addEventListener('click', () => {
-      document.querySelectorAll('.team-member.open').forEach(i => {
-        i.classList.remove('open');
-        i.querySelector('.team-member-body').style.maxHeight = '0';
-      });
-    });
 
     // ── Cursor glow (desktop) ──
     const glow = document.getElementById('cursorGlow');
