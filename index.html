@@ -694,10 +694,8 @@
     .activity-header {
       padding: 1.25rem 1.5rem;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      align-items: flex-start;
       cursor: pointer;
-      gap: 1rem;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -738,33 +736,28 @@
       color: var(--gold-light);
     }
 
-    .activity-toggle {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, .1);
-      display: flex;
+    .activity-ver-mais {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      transition: all .3s;
-      flex-shrink: 0;
+      gap: .3rem;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-top: .35rem;
+      transition: color .3s;
     }
 
-    .activity-item.open .activity-toggle {
-      background: var(--gold);
-      border-color: var(--gold);
-    }
-
-    .activity-toggle svg {
+    .activity-ver-mais svg {
       width: 12px;
       height: 12px;
-      stroke: var(--gray);
-      transition: all .3s;
+      stroke: var(--gold-dark);
+      transition: transform .35s cubic-bezier(.23, 1, .32, 1);
     }
 
-    .activity-item.open .activity-toggle svg {
-      stroke: var(--black);
-      transform: rotate(45deg);
+    .activity-item.open .activity-ver-mais svg {
+      transform: rotate(180deg);
     }
 
     .activity-body {
@@ -1619,9 +1612,9 @@
               <div class="activity-title-group">
                 <h4>Pesquisa & Análise de dados</h4>
                 <p class="activity-subtitle">Mestres em decifrar comportamentos.</p>
+                <span class="activity-ver-mais">Ver mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
               </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
             <div class="activity-body-inner">
@@ -1654,9 +1647,9 @@
               <div class="activity-title-group">
                 <h4>Plataformas & Tecnologia</h4>
                 <p class="activity-subtitle">Sua ideia funcionando sem bugs.</p>
+                <span class="activity-ver-mais">Ver mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
               </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
             <div class="activity-body-inner">
@@ -1697,9 +1690,9 @@
               <div class="activity-title-group">
                 <h4>Design (Físico & Digital)</h4>
                 <p class="activity-subtitle">Identidade visual e experiência tangível.</p>
+                <span class="activity-ver-mais">Ver mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
               </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
             <div class="activity-body-inner">
@@ -1728,9 +1721,9 @@
               <div class="activity-title-group">
                 <h4>Copy & Redação</h4>
                 <p class="activity-subtitle">Estratégia em cada palavra.</p>
+                <span class="activity-ver-mais">Ver mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
               </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
             <div class="activity-body-inner">
@@ -1759,9 +1752,9 @@
               <div class="activity-title-group">
                 <h4>Monitoramento de mercado & CX</h4>
                 <p class="activity-subtitle">Encantamento levado a sério.</p>
+                <span class="activity-ver-mais">Ver mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
               </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
             <div class="activity-body-inner">
@@ -1790,9 +1783,9 @@
               <div class="activity-title-group">
                 <h4>Produtividade & Gestão</h4>
                 <p class="activity-subtitle">Fazemos projetos rodarem.</p>
+                <span class="activity-ver-mais">Ver mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
               </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
             <div class="activity-body-inner">
@@ -1825,9 +1818,9 @@
               <div class="activity-title-group">
                 <h4>Envios de itens</h4>
                 <p class="activity-subtitle">A ponte entre a promessa e a entrega.</p>
+                <span class="activity-ver-mais">Ver mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
               </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
             <div class="activity-body-inner">
@@ -1852,9 +1845,9 @@
               <div class="activity-title-group">
                 <h4>Relacionamento com membros</h4>
                 <p class="activity-subtitle">Cuidando da nossa comunidade de ponta a ponta.</p>
+                <span class="activity-ver-mais">Ver mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
               </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
             <div class="activity-body-inner">
