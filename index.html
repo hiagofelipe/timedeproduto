@@ -703,21 +703,35 @@
 
     .activity-header-left {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 1rem;
     }
 
-    .activity-num {
-      font-family: 'Playfair Display', serif;
+    .activity-icon {
       font-size: 1.1rem;
-      color: var(--gold-dark);
-      min-width: 28px;
+      min-width: 26px;
+      padding-top: .1rem;
+      flex-shrink: 0;
+    }
+
+    .activity-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
     }
 
     .activity-header h4 {
       font-size: .95rem;
       font-weight: 500;
       transition: color .3s;
+      line-height: 1.3;
+    }
+
+    .activity-subtitle {
+      font-size: .82rem;
+      color: var(--gray);
+      font-weight: 400;
+      line-height: 1.4;
     }
 
     .activity-item:hover .activity-header h4 {
@@ -760,11 +774,76 @@
     }
 
     .activity-body-inner {
-      padding: 0 1.5rem 1.25rem 3.75rem;
+      padding: 0 1.5rem 1.5rem 2.5rem;
+    }
+
+    .activity-desc {
       font-size: .85rem;
       color: var(--gray-light);
       line-height: 1.7;
       font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .activity-who {
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      padding-top: 1.25rem;
+    }
+
+    .activity-who-label {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .activity-who-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 1.25rem;
+    }
+
+    .activity-who-person {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .activity-who-person img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 1.5px solid rgba(239, 190, 78, .2);
+      transition: border-color .3s;
+    }
+
+    .activity-who-person img:hover {
+      border-color: rgba(239, 190, 78, .5);
+    }
+
+    .activity-who-person span {
+      font-size: .72rem;
+      color: var(--gray-light);
+      font-weight: 400;
+      text-align: center;
+      max-width: 64px;
+      line-height: 1.3;
+    }
+
+    @media (max-width: 480px) {
+      .activity-body-inner {
+        padding-left: 1.5rem;
+      }
+
+      .activity-who-person img {
+        width: 44px;
+        height: 44px;
+      }
     }
 
     /* ── Connections (interactive orbit) ── */
@@ -1532,111 +1611,271 @@
         <p class="section-text" style="max-width:600px;margin:1.25rem auto 0;text-align:center">Conheça a atuação de cada especialista e saiba exatamente a quem recorrer para resolver seus desafios.</p>
       </div>
       <div class="activity-list">
+
         <div class="activity-item reveal" onclick="toggleActivity(this)">
           <div class="activity-header">
             <div class="activity-header-left">
-              <span class="activity-num">01</span>
-              <h4>Pesquisa com Membros</h4>
+              <span class="activity-icon">🔍</span>
+              <div class="activity-title-group">
+                <h4>Pesquisa & Análise de dados</h4>
+                <p class="activity-subtitle">Mestres em decifrar comportamentos.</p>
+              </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg></div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
-            <div class="activity-body-inner">Realizamos pesquisas qualitativas e quantitativas com membros e leads para
-              entender profundamente suas dores, desejos e comportamentos — a base de tudo que construímos.</div>
+            <div class="activity-body-inner">
+              <p class="activity-desc">Precisa de ajuda com o Typeform ou quer entender o que um dashboard está dizendo? Realizamos pesquisas quantitativas e qualitativas com leads, membros (e até piratas!) para mapear dores e gerar insights reais.</p>
+              <div class="activity-who">
+                <p class="activity-who-label">Quem chamar</p>
+                <div class="activity-who-grid">
+                  <div class="activity-who-person">
+                    <img src="anabeatriz.jpg" alt="Ana Beatriz">
+                    <span>Ana Beatriz</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="hiagofelipe.jpg" alt="Hiago">
+                    <span>Hiago</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="ariadnecarneiro.jpg" alt="Ariadne">
+                    <span>Ariadne</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
         <div class="activity-item reveal" onclick="toggleActivity(this)">
           <div class="activity-header">
             <div class="activity-header-left">
-              <span class="activity-num">02</span>
-              <h4>Design de Produto</h4>
+              <span class="activity-icon">🖥️</span>
+              <div class="activity-title-group">
+                <h4>Plataformas & Tecnologia</h4>
+                <p class="activity-subtitle">Sua ideia funcionando sem bugs.</p>
+              </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg></div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
-            <div class="activity-body-inner">Desenhamos fluxos, wireframes, protótipos e interfaces finais de produtos e
-              serviços, garantindo a melhor experiência possível do início ao fim.</div>
+            <div class="activity-body-inner">
+              <p class="activity-desc">Encontrou um erro na plataforma de aulas ou em algum de nossos sites? Nós sabemos como construir e ajustar cada detalhe técnico.</p>
+              <div class="activity-who">
+                <p class="activity-who-label">Quem chamar</p>
+                <div class="activity-who-grid">
+                  <div class="activity-who-person">
+                    <img src="elanerodrigues.jpg" alt="Elane">
+                    <span>Elane</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="hiagofelipe.jpg" alt="Hiago">
+                    <span>Hiago</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="armandoneto.jpg" alt="Armando">
+                    <span>Armando</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="eriaalencar.jpg" alt="Éria">
+                    <span>Éria</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="anabeatriz.jpg" alt="Ana Beatriz">
+                    <span>Ana Beatriz</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
         <div class="activity-item reveal" onclick="toggleActivity(this)">
           <div class="activity-header">
             <div class="activity-header-left">
-              <span class="activity-num">03</span>
-              <h4>Redação & Tom de Voz</h4>
+              <span class="activity-icon">🎨</span>
+              <div class="activity-title-group">
+                <h4>Design (Físico & Digital)</h4>
+                <p class="activity-subtitle">Identidade visual e experiência tangível.</p>
+              </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg></div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
-            <div class="activity-body-inner">Escrevemos e revisamos textos e comunicações com tom de voz alinhado à
-              marca, garantindo consistência e clareza em cada ponto de contato.</div>
+            <div class="activity-body-inner">
+              <p class="activity-desc">Da estética impecável da AUVP em mídias digitais e OOH, aos produtos que nossos membros amam usar. Se você precisa de cores, logos da AUVP, fotos do Raul, elementos visuais ou quer criar brindes, como meias e bonés a kits exclusivos, este é o lugar.</p>
+              <div class="activity-who">
+                <p class="activity-who-label">Quem chamar</p>
+                <div class="activity-who-grid">
+                  <div class="activity-who-person">
+                    <img src="armandoneto.jpg" alt="Armando">
+                    <span>Armando</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="eriaalencar.jpg" alt="Éria">
+                    <span>Éria</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
         <div class="activity-item reveal" onclick="toggleActivity(this)">
           <div class="activity-header">
             <div class="activity-header-left">
-              <span class="activity-num">04</span>
-              <h4>Feedback & Melhoria Contínua</h4>
+              <span class="activity-icon">✍️</span>
+              <div class="activity-title-group">
+                <h4>Copy & Redação</h4>
+                <p class="activity-subtitle">Estratégia em cada palavra.</p>
+              </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg></div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
-            <div class="activity-body-inner">Coletamos feedbacks de usuários e participantes de forma estruturada,
-              transformando-os em ações concretas de evolução para nossos produtos.</div>
+            <div class="activity-body-inner">
+              <p class="activity-desc">De apostilas, roteiros de vídeo e mapas mentais a este texto que você lê agora. Quer revisar uma copy, um playbook ou criar materiais institucionais com narrativa estratégica? Nossa redação está pronta para ajudar.</p>
+              <div class="activity-who">
+                <p class="activity-who-label">Quem chamar</p>
+                <div class="activity-who-grid">
+                  <div class="activity-who-person">
+                    <img src="jeniffernascimento.jpg" alt="Jeniffer">
+                    <span>Jeniffer</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="anabeatriz.jpg" alt="Ana Beatriz">
+                    <span>Ana Beatriz</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
         <div class="activity-item reveal" onclick="toggleActivity(this)">
           <div class="activity-header">
             <div class="activity-header-left">
-              <span class="activity-num">05</span>
-              <h4>Análise de Dados & Insights</h4>
+              <span class="activity-icon">📊</span>
+              <div class="activity-title-group">
+                <h4>Monitoramento de mercado & CX</h4>
+                <p class="activity-subtitle">Encantamento levado a sério.</p>
+              </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg></div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
-            <div class="activity-body-inner">Analisamos dados de uso e comportamento para gerar insights de evolução,
-              transformando números em decisões estratégicas de produto.</div>
+            <div class="activity-body-inner">
+              <p class="activity-desc">Quem é nosso público e o que ele busca? Analisamos o mercado para sugerir melhorias e garantir que o CX (Customer Experience) seja mais do que uma sigla, criando conexões que encantam de verdade.</p>
+              <div class="activity-who">
+                <p class="activity-who-label">Quem chamar</p>
+                <div class="activity-who-grid">
+                  <div class="activity-who-person">
+                    <img src="beatrizhenriques.jpg" alt="Beatriz Henriques">
+                    <span>Beatriz</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="deborasanders.jpg" alt="Debora">
+                    <span>Debora</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
         <div class="activity-item reveal" onclick="toggleActivity(this)">
           <div class="activity-header">
             <div class="activity-header-left">
-              <span class="activity-num">06</span>
-              <h4>Materiais & Campanhas</h4>
+              <span class="activity-icon">🗂️</span>
+              <div class="activity-title-group">
+                <h4>Produtividade & Gestão</h4>
+                <p class="activity-subtitle">Fazemos projetos rodarem.</p>
+              </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg></div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
-            <div class="activity-body-inner">Criamos apresentações, materiais visuais e conteúdos para eventos e
-              campanhas, além de roteiros, e-mails, páginas e conteúdos educativos sobre os produtos.</div>
+            <div class="activity-body-inner">
+              <p class="activity-desc">Planilhas, ClickUp, fluxos de trabalho e priorização. Se o desafio é gestão de tempo, de pessoas ou aumentar a eficiência do time, somos especialistas em transformar caos em projetos executados.</p>
+              <div class="activity-who">
+                <p class="activity-who-label">Quem chamar</p>
+                <div class="activity-who-grid">
+                  <div class="activity-who-person">
+                    <img src="beatrizhenriques.jpg" alt="Beatriz Henriques">
+                    <span>Beatriz</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="danielmachado.jpg" alt="Daniel">
+                    <span>Daniel</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="ariadnecarneiro.jpg" alt="Ariadne">
+                    <span>Ariadne</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
         <div class="activity-item reveal" onclick="toggleActivity(this)">
           <div class="activity-header">
             <div class="activity-header-left">
-              <span class="activity-num">07</span>
-              <h4>Monitoramento de Mercado</h4>
+              <span class="activity-icon">📦</span>
+              <div class="activity-title-group">
+                <h4>Envios de itens</h4>
+                <p class="activity-subtitle">A ponte entre a promessa e a entrega.</p>
+              </div>
             </div>
-            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M5 12h14" />
-              </svg></div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
           </div>
           <div class="activity-body">
-            <div class="activity-body-inner">Monitoramos tendências e boas práticas de mercado em produtos, design,
-              eventos e conteúdo — mantendo nosso radar sempre ligado no que há de mais relevante.</div>
+            <div class="activity-body-inner">
+              <p class="activity-desc">Quer enviar um mimo especial ou saber o status daquela jaqueta que o Raul prometeu em live? De cartas a brindes exclusivos, nós cuidamos do rastreio e da entrega do carinho aos membros.</p>
+              <div class="activity-who">
+                <p class="activity-who-label">Quem chamar</p>
+                <div class="activity-who-grid">
+                  <div class="activity-who-person">
+                    <img src="joaopauloala.jpg" alt="João Ala">
+                    <span>João Ala</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
+        <div class="activity-item reveal" onclick="toggleActivity(this)">
+          <div class="activity-header">
+            <div class="activity-header-left">
+              <span class="activity-icon">💬</span>
+              <div class="activity-title-group">
+                <h4>Relacionamento com membros</h4>
+                <p class="activity-subtitle">Cuidando da nossa comunidade de ponta a ponta.</p>
+              </div>
+            </div>
+            <div class="activity-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+          </div>
+          <div class="activity-body">
+            <div class="activity-body-inner">
+              <p class="activity-desc">Seja mediando grupos de WhatsApp ou encontrando a resposta ideal para aquele membro que quer crescer conosco. Atuamos diretamente na linha de frente para garantir a melhor convivência.</p>
+              <div class="activity-who">
+                <p class="activity-who-label">Quem chamar</p>
+                <div class="activity-who-grid">
+                  <div class="activity-who-person">
+                    <img src="beatrizhenriques.jpg" alt="Beatriz Henriques">
+                    <span>Beatriz</span>
+                  </div>
+                  <div class="activity-who-person">
+                    <img src="deborasanders.jpg" alt="Debora">
+                    <span>Debora</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
