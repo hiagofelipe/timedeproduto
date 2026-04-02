@@ -1207,8 +1207,8 @@
     <div class="nav-links">
       <a href="#leadership">Quem somos</a>
       <a href="#pillars">Pilares</a>
-      <a href="#activities">Atuação</a>
       <a href="#connections">Conexões</a>
+      <a href="#activities">Atuação</a>
       <a href="#process">Processo</a>
     </div>
     <div class="menu-toggle" id="menuToggle">
@@ -1220,8 +1220,8 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#leadership" onclick="closeMenu()">Quem somos</a>
     <a href="#pillars" onclick="closeMenu()">Pilares</a>
-    <a href="#activities" onclick="closeMenu()">Atuação</a>
     <a href="#connections" onclick="closeMenu()">Conexões</a>
+    <a href="#activities" onclick="closeMenu()">Atuação</a>
     <a href="#process" onclick="closeMenu()">Processo</a>
   </div>
 
@@ -1471,6 +1471,58 @@
     </div>
   </section>
 
+  <div class="divider reveal"></div>
+
+  <!-- Connections -->
+  <section id="connections">
+    <div class="connections">
+      <div class="reveal">
+        <div class="section-label" style="justify-content:center">Conexões</div>
+        <h2 class="section-title">A <em>rede</em> que nos conecta</h2>
+        <p class="section-text" style="margin:0 auto">Produto é o hub que une diferentes áreas, garantindo alinhamento e
+          execução eficaz em toda a empresa.</p>
+      </div>
+      <div class="orbit-container reveal" style="transition-delay:.15s">
+        <div class="orbit-ring orbit-ring-1"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-center">Produto</div>
+        <!-- Nodes positioned via JS -->
+        <div class="orbit-node" data-area="Atendimento"
+          style="--tx:-130px;--ty:-130px;transform:translate(-130px,-130px)">
+          <span class="orbit-node-icon">💬</span>
+          <span class="orbit-node-label">Atendimento</span>
+        </div>
+        <div class="orbit-node" data-area="Audiovisual"
+          style="--tx:130px;--ty:-130px;transform:translate(130px,-130px)">
+          <span class="orbit-node-icon">🎬</span>
+          <span class="orbit-node-label">Audiovisual</span>
+        </div>
+        <div class="orbit-node" data-area="Vendas" style="--tx:175px;--ty:0px;transform:translate(175px,0px)">
+          <span class="orbit-node-icon">📈</span>
+          <span class="orbit-node-label">Vendas</span>
+        </div>
+        <div class="orbit-node" data-area="Tecnologia" style="--tx:130px;--ty:130px;transform:translate(130px,130px)">
+          <span class="orbit-node-icon">⚡</span>
+          <span class="orbit-node-label">Tecnologia</span>
+        </div>
+        <div class="orbit-node" data-area="Marketing" style="--tx:-130px;--ty:130px;transform:translate(-130px,130px)">
+          <span class="orbit-node-icon">📢</span>
+          <span class="orbit-node-label">Marketing</span>
+        </div>
+        <div class="orbit-node" data-area="Controladoria" style="--tx:-175px;--ty:0px;transform:translate(-175px,0px)">
+          <span class="orbit-node-icon">📊</span>
+          <span class="orbit-node-label">Controladoria</span>
+        </div>
+        <div class="orbit-node" data-area="Financeiro" style="--tx:0px;--ty:175px;transform:translate(0px,175px)">
+          <span class="orbit-node-icon">🏦</span>
+          <span class="orbit-node-label">Financeiro</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider reveal"></div>
+
   <!-- Activities -->
   <section id="activities">
     <div class="activities">
@@ -1584,56 +1636,6 @@
             <div class="activity-body-inner">Monitoramos tendências e boas práticas de mercado em produtos, design,
               eventos e conteúdo — mantendo nosso radar sempre ligado no que há de mais relevante.</div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider reveal"></div>
-
-  <!-- Connections -->
-  <section id="connections">
-    <div class="connections">
-      <div class="reveal">
-        <div class="section-label" style="justify-content:center">Conexões</div>
-        <h2 class="section-title">A <em>rede</em> que nos conecta</h2>
-        <p class="section-text" style="margin:0 auto">Produto é o hub que une diferentes áreas, garantindo alinhamento e
-          execução eficaz em toda a empresa.</p>
-      </div>
-      <div class="orbit-container reveal" style="transition-delay:.15s">
-        <div class="orbit-ring orbit-ring-1"></div>
-        <div class="orbit-ring orbit-ring-2"></div>
-        <div class="orbit-center">Produto</div>
-        <!-- Nodes positioned via JS -->
-        <div class="orbit-node" data-area="Atendimento"
-          style="--tx:-130px;--ty:-130px;transform:translate(-130px,-130px)">
-          <span class="orbit-node-icon">💬</span>
-          <span class="orbit-node-label">Atendimento</span>
-        </div>
-        <div class="orbit-node" data-area="Audiovisual"
-          style="--tx:130px;--ty:-130px;transform:translate(130px,-130px)">
-          <span class="orbit-node-icon">🎬</span>
-          <span class="orbit-node-label">Audiovisual</span>
-        </div>
-        <div class="orbit-node" data-area="Vendas" style="--tx:175px;--ty:0px;transform:translate(175px,0px)">
-          <span class="orbit-node-icon">📈</span>
-          <span class="orbit-node-label">Vendas</span>
-        </div>
-        <div class="orbit-node" data-area="Tecnologia" style="--tx:130px;--ty:130px;transform:translate(130px,130px)">
-          <span class="orbit-node-icon">⚡</span>
-          <span class="orbit-node-label">Tecnologia</span>
-        </div>
-        <div class="orbit-node" data-area="Marketing" style="--tx:-130px;--ty:130px;transform:translate(-130px,130px)">
-          <span class="orbit-node-icon">📢</span>
-          <span class="orbit-node-label">Marketing</span>
-        </div>
-        <div class="orbit-node" data-area="Controladoria" style="--tx:-175px;--ty:0px;transform:translate(-175px,0px)">
-          <span class="orbit-node-icon">📊</span>
-          <span class="orbit-node-label">Controladoria</span>
-        </div>
-        <div class="orbit-node" data-area="Financeiro" style="--tx:0px;--ty:175px;transform:translate(0px,175px)">
-          <span class="orbit-node-icon">🏦</span>
-          <span class="orbit-node-label">Financeiro</span>
         </div>
       </div>
     </div>
