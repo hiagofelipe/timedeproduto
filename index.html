@@ -1246,6 +1246,77 @@
       }
     }
 
+    /* ── Updates ── */
+    .updates {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .updates-intro {
+      font-size: .95rem;
+      color: var(--gray);
+      line-height: 1.65;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+
+    .updates-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .update-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.5rem 1.75rem;
+      background: var(--dark-card);
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: 12px;
+      text-decoration: none;
+      transition: border-color .3s, transform .3s cubic-bezier(.23, 1, .32, 1), box-shadow .3s;
+    }
+
+    .update-link:hover {
+      border-color: rgba(239, 190, 78, .22);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .35);
+    }
+
+    .update-label {
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold-dark);
+      transition: color .3s;
+    }
+
+    .update-link:hover .update-label {
+      color: var(--gold-light);
+    }
+
+    .update-arrow {
+      width: 16px;
+      height: 16px;
+      stroke: var(--gold-dark);
+      flex-shrink: 0;
+      transition: stroke .3s, transform .3s cubic-bezier(.23, 1, .32, 1);
+    }
+
+    .update-link:hover .update-arrow {
+      stroke: var(--gold-light);
+      transform: translate(3px, -3px);
+    }
+
+    @media (max-width: 768px) {
+      .updates-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ── Footer ── */
     .footer {
       border-top: 1px solid rgba(255, 255, 255, .04);
@@ -2103,6 +2174,35 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- Updates -->
+  <section id="updates" style="padding: clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,4rem)">
+    <div class="updates">
+      <div class="reveal">
+        <p class="updates-intro">Acompanhe as novidades mensais que vamos implementando ao longo do ano de 2026:</p>
+        <div class="updates-grid">
+          <a href="https://comunidade.auvp.com.br/topic/38469-%F0%9F%9A%A8-atualiza%C3%A7%C3%B5es-importantes-na-auvp-janeiro/#comment-304186" target="_blank" rel="noopener" class="update-link">
+            <span class="update-label">Novidades de Janeiro</span>
+            <svg class="update-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17L17 7M7 7h10v10"/>
+            </svg>
+          </a>
+          <a href="https://comunidade.auvp.com.br/topic/39677-%F0%9F%9A%A8-novidades-da-auvp-escola-fevereiro/#comment-312501" target="_blank" rel="noopener" class="update-link">
+            <span class="update-label">Novidades de Fevereiro</span>
+            <svg class="update-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17L17 7M7 7h10v10"/>
+            </svg>
+          </a>
+          <a href="https://comunidade.auvp.com.br/topic/40971-%F0%9F%9A%A8-novidades-da-auvp-mar%C3%A7o/#comment-321914" target="_blank" rel="noopener" class="update-link">
+            <span class="update-label">Novidades de Março</span>
+            <svg class="update-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17L17 7M7 7h10v10"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
