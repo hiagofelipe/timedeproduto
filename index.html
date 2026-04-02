@@ -1129,6 +1129,52 @@
       text-align: center;
     }
 
+    /* ── Team member expanded — desktop override (subtle) ── */
+    @media (min-width: 769px) {
+      .team-member.open .team-member-header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 1.5rem;
+      }
+
+      .team-member.open .team-member-header-left {
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .team-member.open .team-member-photo {
+        width: 68px;
+        height: 68px;
+      }
+
+      .team-member.open .team-member-info {
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .team-member.open .team-member-name {
+        font-size: .95rem;
+        color: var(--gold-light);
+      }
+
+      .team-member.open .team-member-toggle {
+        position: static;
+        background: var(--gold);
+        border-color: var(--gold);
+      }
+
+      .team-member.open .team-member-toggle svg {
+        stroke: var(--black);
+      }
+
+      .team-member.open .team-member-body-inner {
+        padding: 0 1.5rem 1.25rem 5.75rem;
+        text-align: left;
+      }
+    }
+
     /* ── Values marquee ── */
     .values-section {
       padding: clamp(3rem, 8vw, 6rem) 0;
