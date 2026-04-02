@@ -608,10 +608,7 @@
     }
 
     .pillar-card p {
-      font-size: .85rem;
-      color: var(--gray);
-      line-height: 1.65;
-      font-weight: 300;
+      display: none;
     }
 
     .pillar-detail {
@@ -626,35 +623,10 @@
     }
 
     .pillar-detail-inner {
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, .06);
-      font-size: .82rem;
-      color: var(--gray-light);
-      line-height: 1.7;
+      font-size: .85rem;
+      color: var(--gray);
+      line-height: 1.65;
       font-weight: 300;
-    }
-
-    .pillar-expand {
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-      margin-top: 1rem;
-      font-size: .72rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--gold-dark);
-      font-weight: 500;
-      transition: color .3s;
-    }
-
-    .pillar-expand svg {
-      width: 14px;
-      height: 14px;
-      transition: transform .3s;
-    }
-
-    .pillar-card.expanded .pillar-expand svg {
-      transform: rotate(180deg);
     }
 
     @media (max-width: 900px) {
@@ -1406,96 +1378,44 @@
       <div class="pillars-grid">
         <div class="pillar-card reveal" onclick="togglePillar(this)">
           <div class="pillar-icon">🔬</div>
-          <h3>Pesquisa & Dados</h3>
-          <p>Decisões baseadas em evidências, com pesquisas qualitativas, quantitativas e análise comportamental.</p>
+          <h3>Dados</h3>
           <div class="pillar-detail">
-            <div class="pillar-detail-inner">Realizamos pesquisas profundas com membros e leads, coletamos feedbacks
-              continuamente e analisamos dados de uso e comportamento para gerar insights que direcionam a evolução dos
-              nossos produtos.</div>
-          </div>
-          <div class="pillar-expand">
-            Explorar
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
+            <div class="pillar-detail-inner">Realizamos pesquisas com membros e leads, coletamos dados de desempenho e comportamento para tomar decisões que evoluam nossas entregas.</div>
           </div>
         </div>
         <div class="pillar-card reveal" style="transition-delay:.1s" onclick="togglePillar(this)">
           <div class="pillar-icon">✏️</div>
-          <h3>Design & Experiência</h3>
-          <p>Interfaces elegantes, fluxos intuitivos e consistência em todos os pontos de contato.</p>
+          <h3>Design</h3>
           <div class="pillar-detail">
-            <div class="pillar-detail-inner">Desenhamos wireframes, protótipos e interfaces finais que garantem uma
-              experiência coesa e encantadora para cada usuário, cuidando de cada detalhe — do primeiro clique à última
-              interação.</div>
-          </div>
-          <div class="pillar-expand">
-            Explorar
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
+            <div class="pillar-detail-inner">Desenhamos interfaces elegantes, protótipos e plataformas finais que garantem a experiência encantadora para cada usuário.</div>
           </div>
         </div>
         <div class="pillar-card reveal" style="transition-delay:.2s" onclick="togglePillar(this)">
           <div class="pillar-icon">🚀</div>
-          <h3>Inovação & Mercado</h3>
-          <p>Monitoramento constante de tendências e ações de players para antecipar movimentos.</p>
+          <h3>Inovação</h3>
           <div class="pillar-detail">
-            <div class="pillar-detail-inner">Mantemos o radar ligado no mercado para acompanhar tendências, boas
-              práticas e ações de outros players — garantindo que nossos produtos estejam sempre um passo à frente.
-            </div>
-          </div>
-          <div class="pillar-expand">
-            Explorar
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
+            <div class="pillar-detail-inner">Mantemos o radar ligado no mercado para acompanhar tendências, boas práticas e ações de concorrentes, para estarmos sempre um passo à frente.</div>
           </div>
         </div>
         <div class="pillar-card reveal" style="transition-delay:.1s" onclick="togglePillar(this)">
           <div class="pillar-icon">📋</div>
-          <h3>Backlog & Priorização</h3>
-          <p>Gestão contínua do backlog de produto com base em dados, feedback e visão estratégica.</p>
+          <h3>Priorização</h3>
           <div class="pillar-detail">
-            <div class="pillar-detail-inner">Desenvolvemos, priorizamos e refinamos o backlog de produto continuamente,
-              equilibrando demandas do negócio com necessidades reais dos membros para maximizar impacto.</div>
-          </div>
-          <div class="pillar-expand">
-            Explorar
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
+            <div class="pillar-detail-inner">Fazemos a gestão contínua do backlog de produto com base em dados de performance para priorizar demandas do negócio com necessidades reais dos membros.</div>
           </div>
         </div>
         <div class="pillar-card reveal" style="transition-delay:.2s" onclick="togglePillar(this)">
           <div class="pillar-icon">🎯</div>
-          <h3>Conteúdo & Comunicação</h3>
-          <p>Textos, roteiros, e-mails e materiais visuais com tom de voz alinhado à marca.</p>
+          <h3>Conteúdo</h3>
           <div class="pillar-detail">
-            <div class="pillar-detail-inner">Escrevemos e revisamos todos os conteúdos dos nossos produtos — de e-mails
-              a páginas educativas — garantindo clareza, elegância e alinhamento com a identidade da marca.</div>
-          </div>
-          <div class="pillar-expand">
-            Explorar
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
+            <div class="pillar-detail-inner">Escrevemos e revisamos todos os conteúdos dos nossos produtos além de e-mails, sites e materiais educativos com tom e voz alinhados com a marca.</div>
           </div>
         </div>
         <div class="pillar-card reveal" style="transition-delay:.3s" onclick="togglePillar(this)">
           <div class="pillar-icon">🤝</div>
-          <h3>Colaboração Cross</h3>
-          <p>Facilitamos a integração entre áreas para alinhamento e execução eficaz.</p>
+          <h3>Colaboração cross</h3>
           <div class="pillar-detail">
-            <div class="pillar-detail-inner">Atuamos como ponte entre as diversas áreas da empresa, facilitando a
-              colaboração e garantindo que todos os times estejam alinhados na direção estratégica e na execução dos
-              projetos.</div>
-          </div>
-          <div class="pillar-expand">
-            Explorar
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
+            <div class="pillar-detail-inner">Atuamos como ponte entre diversas áreas da empresa para assegurar que todos os times estejam alinhados na direção estratégica dos projetos.</div>
           </div>
         </div>
       </div>
