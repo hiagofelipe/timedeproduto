@@ -956,6 +956,7 @@
       background: var(--dark-card);
       overflow: hidden;
       transition: border-color .3s;
+      position: relative;
     }
 
     .team-member:hover {
@@ -970,6 +971,7 @@
       cursor: pointer;
       gap: 1rem;
       -webkit-tap-highlight-color: transparent;
+      transition: padding .45s cubic-bezier(.23,1,.32,1);
     }
 
     .team-member-header-left {
@@ -986,6 +988,10 @@
       object-position: center top;
       border: 1.5px solid rgba(239, 190, 78, .2);
       flex-shrink: 0;
+      transition: width .45s cubic-bezier(.23,1,.32,1),
+                  height .45s cubic-bezier(.23,1,.32,1),
+                  border-color .35s,
+                  border-width .35s;
     }
 
     .team-member-info {
@@ -1067,6 +1073,60 @@
       .team-member-body-inner {
         padding-left: 1.5rem;
       }
+    }
+
+    /* ── Team member expanded state ── */
+    .team-member.open {
+      border-color: rgba(239, 190, 78, .18);
+    }
+
+    .team-member.open .team-member-header {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem 1rem;
+      gap: .75rem;
+    }
+
+    .team-member.open .team-member-header-left {
+      flex-direction: column;
+      align-items: center;
+      gap: .85rem;
+      width: 100%;
+    }
+
+    .team-member.open .team-member-photo {
+      width: 100px;
+      height: 100px;
+      border-color: rgba(239, 190, 78, .5);
+      border-width: 2px;
+    }
+
+    .team-member.open .team-member-info {
+      align-items: center;
+      text-align: center;
+    }
+
+    .team-member.open .team-member-name {
+      font-size: 1.05rem;
+    }
+
+    .team-member.open .team-member-toggle {
+      position: absolute;
+      top: .85rem;
+      right: .85rem;
+      background: rgba(239, 190, 78, .06);
+      border-color: rgba(239, 190, 78, .18);
+    }
+
+    .team-member.open .team-member-toggle svg {
+      stroke: var(--gold-dark);
+      transform: rotate(45deg);
+    }
+
+    .team-member.open .team-member-body-inner {
+      padding: 0 2rem 1.75rem;
+      text-align: center;
     }
 
     /* ── Values marquee ── */
@@ -1626,7 +1686,7 @@
       </div>
       <div class="team-list">
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="beatrizhenriques.jpg" alt="Beatriz Henriques" class="team-member-photo">
@@ -1644,7 +1704,7 @@
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="danielmachado.jpg" alt="Daniel Machado" class="team-member-photo">
@@ -1662,7 +1722,7 @@
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="ariadnecarneiro.jpg" alt="Ariadne Carneiro" class="team-member-photo">
@@ -1680,7 +1740,7 @@
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="deborasanders.jpg" alt="Debora Sanders" class="team-member-photo">
@@ -1698,7 +1758,7 @@
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="elanerodrigues.jpg" alt="Elane Rodrigues" class="team-member-photo">
@@ -1716,7 +1776,7 @@
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="jeniffernascimento.jpg" alt="Jeniffer Nascimento" class="team-member-photo">
@@ -1734,7 +1794,7 @@
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="armandoneto.jpg" alt="Armando Neto" class="team-member-photo">
@@ -1752,7 +1812,7 @@
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="eriaalencar.jpg" alt="Éria Alencar" class="team-member-photo">
@@ -1770,7 +1830,7 @@
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="joaopauloala.jpg" alt="João Paulo Ala" class="team-member-photo">
@@ -1788,7 +1848,7 @@
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="mateusgraff.jpg" alt="Mateus Graff" class="team-member-photo">
@@ -1806,7 +1866,7 @@
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="hiagofelipe.jpg" alt="Hiago Felipe" class="team-member-photo">
@@ -1824,7 +1884,7 @@
           </div>
         </div>
 
-        <div class="team-member reveal" onclick="toggleMember(this)">
+        <div class="team-member reveal" onclick="toggleMember(this, event)">
           <div class="team-member-header">
             <div class="team-member-header-left">
               <img src="anabeatriz.jpg" alt="Ana Beatriz" class="team-member-photo">
@@ -1958,7 +2018,8 @@
     }
 
     // ── Team member expand ──
-    function toggleMember(item) {
+    function toggleMember(item, e) {
+      e.stopPropagation();
       const wasOpen = item.classList.contains('open');
       document.querySelectorAll('.team-member.open').forEach(i => {
         i.classList.remove('open');
@@ -1970,6 +2031,13 @@
         body.style.maxHeight = body.scrollHeight + 'px';
       }
     }
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.team-member.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.team-member-body').style.maxHeight = '0';
+      });
+    });
 
     // ── Cursor glow (desktop) ──
     const glow = document.getElementById('cursorGlow');
