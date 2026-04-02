@@ -596,15 +596,46 @@
       background: rgba(239, 190, 78, .15);
     }
 
+    .pillar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: .6rem;
+    }
+
     .pillar-card h3 {
       font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: .6rem;
       transition: color .3s;
     }
 
     .pillar-card:hover h3 {
       color: var(--gold-light);
+    }
+
+    .pillar-expand {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: .7rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color .3s;
+    }
+
+    .pillar-expand svg {
+      width: 13px;
+      height: 13px;
+      transition: transform .35s cubic-bezier(.23, 1, .32, 1);
+    }
+
+    .pillar-card.expanded .pillar-expand svg {
+      transform: rotate(180deg);
     }
 
     .pillar-card p {
@@ -1378,42 +1409,60 @@
       <div class="pillars-grid">
         <div class="pillar-card reveal" onclick="togglePillar(this)">
           <div class="pillar-icon">🔬</div>
-          <h3>Dados</h3>
+          <div class="pillar-header">
+            <h3>Dados</h3>
+            <span class="pillar-expand">Explorar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
           <div class="pillar-detail">
             <div class="pillar-detail-inner">Realizamos pesquisas com membros e leads, coletamos dados de desempenho e comportamento para tomar decisões que evoluam nossas entregas.</div>
           </div>
         </div>
         <div class="pillar-card reveal" style="transition-delay:.1s" onclick="togglePillar(this)">
           <div class="pillar-icon">✏️</div>
-          <h3>Design</h3>
+          <div class="pillar-header">
+            <h3>Design</h3>
+            <span class="pillar-expand">Explorar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
           <div class="pillar-detail">
             <div class="pillar-detail-inner">Desenhamos interfaces elegantes, protótipos e plataformas finais que garantem a experiência encantadora para cada usuário.</div>
           </div>
         </div>
         <div class="pillar-card reveal" style="transition-delay:.2s" onclick="togglePillar(this)">
           <div class="pillar-icon">🚀</div>
-          <h3>Inovação</h3>
+          <div class="pillar-header">
+            <h3>Inovação</h3>
+            <span class="pillar-expand">Explorar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
           <div class="pillar-detail">
             <div class="pillar-detail-inner">Mantemos o radar ligado no mercado para acompanhar tendências, boas práticas e ações de concorrentes, para estarmos sempre um passo à frente.</div>
           </div>
         </div>
         <div class="pillar-card reveal" style="transition-delay:.1s" onclick="togglePillar(this)">
           <div class="pillar-icon">📋</div>
-          <h3>Priorização</h3>
+          <div class="pillar-header">
+            <h3>Priorização</h3>
+            <span class="pillar-expand">Explorar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
           <div class="pillar-detail">
             <div class="pillar-detail-inner">Fazemos a gestão contínua do backlog de produto com base em dados de performance para priorizar demandas do negócio com necessidades reais dos membros.</div>
           </div>
         </div>
         <div class="pillar-card reveal" style="transition-delay:.2s" onclick="togglePillar(this)">
           <div class="pillar-icon">🎯</div>
-          <h3>Conteúdo</h3>
+          <div class="pillar-header">
+            <h3>Conteúdo</h3>
+            <span class="pillar-expand">Explorar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
           <div class="pillar-detail">
             <div class="pillar-detail-inner">Escrevemos e revisamos todos os conteúdos dos nossos produtos além de e-mails, sites e materiais educativos com tom e voz alinhados com a marca.</div>
           </div>
         </div>
         <div class="pillar-card reveal" style="transition-delay:.3s" onclick="togglePillar(this)">
           <div class="pillar-icon">🤝</div>
-          <h3>Colaboração cross</h3>
+          <div class="pillar-header">
+            <h3>Colaboração cross</h3>
+            <span class="pillar-expand">Explorar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
           <div class="pillar-detail">
             <div class="pillar-detail-inner">Atuamos como ponte entre diversas áreas da empresa para assegurar que todos os times estejam alinhados na direção estratégica dos projetos.</div>
           </div>
