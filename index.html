@@ -845,108 +845,134 @@
       }
     }
 
-    /* ── Connections (interactive orbit) ── */
+    /* ── Connections ── */
     .connections {
       max-width: 1200px;
       margin: 0 auto;
       text-align: center;
     }
 
-    .orbit-container {
-      position: relative;
-      width: min(500px, 85vw);
-      height: min(500px, 85vw);
-      margin: 3rem auto 0;
-    }
-
-    .orbit-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(239, 190, 78, .15), rgba(239, 190, 78, .03));
-      border: 1px solid rgba(239, 190, 78, .2);
+    .connections-hub {
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 3rem auto 2rem;
+    }
+
+    .connections-hub-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(239, 190, 78, .15), rgba(239, 190, 78, .03));
+      border: 1px solid rgba(239, 190, 78, .25);
       font-weight: 600;
-      font-size: .75rem;
+      font-size: .8rem;
       letter-spacing: .08em;
       color: var(--gold);
-      text-align: center;
-      line-height: 1.3;
-      z-index: 2;
+      position: relative;
     }
 
-    .orbit-ring {
+    .connections-hub-badge::before,
+    .connections-hub-badge::after {
+      content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
       border-radius: 50%;
-      border: 1px solid rgba(239, 190, 78, .06);
+      border: 1px solid rgba(239, 190, 78, .08);
+      animation: pulseRing 3s ease-in-out infinite;
     }
 
-    .orbit-ring-1 {
-      width: 260px;
-      height: 260px;
-      transform: translate(-50%, -50%);
-      animation: spinSlow 60s linear infinite;
+    .connections-hub-badge::before {
+      width: 130px;
+      height: 130px;
     }
 
-    .orbit-ring-2 {
-      width: 400px;
-      height: 400px;
-      transform: translate(-50%, -50%);
-      animation: spinSlow 90s linear infinite reverse;
+    .connections-hub-badge::after {
+      width: 170px;
+      height: 170px;
+      animation-delay: .6s;
     }
 
-    @keyframes spinSlow {
-      to {
-        transform: translate(-50%, -50%) rotate(360deg);
+    @keyframes pulseRing {
+      0%, 100% { opacity: .4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.04); }
+    }
+
+    .connections-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+      text-align: left;
+    }
+
+    .connection-card {
+      background: var(--dark-card);
+      border: 1px solid rgba(255, 255, 255, .04);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      transition: all .4s cubic-bezier(.23, 1, .32, 1);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .connection-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+
+    .connection-card:hover::before {
+      opacity: 1;
+    }
+
+    .connection-card:hover {
+      border-color: rgba(239, 190, 78, .15);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+    }
+
+    .connection-card-icon {
+      font-size: 1.6rem;
+      margin-bottom: .9rem;
+      display: block;
+    }
+
+    .connection-card-name {
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: .6rem;
+      display: block;
+    }
+
+    .connection-card-desc {
+      font-size: .82rem;
+      color: var(--gray-light);
+      line-height: 1.68;
+      font-weight: 300;
+      margin: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .connections-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    .orbit-node {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 80px;
-      height: 80px;
-      margin: -40px 0 0 -40px;
-      background: var(--dark-card);
-      border: 1px solid rgba(255, 255, 255, .06);
-      border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: .25rem;
-      cursor: pointer;
-      transition: all .4s;
-      z-index: 3;
-    }
-
-    .orbit-node:hover {
-      border-color: rgba(239, 190, 78, .3);
-      transform: translate(var(--tx), var(--ty)) scale(1.12) !important;
-      box-shadow: 0 10px 40px rgba(239, 190, 78, .1);
-    }
-
-    .orbit-node-icon {
-      font-size: 1.2rem;
-    }
-
-    .orbit-node-label {
-      font-size: .55rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--gray-light);
-      font-weight: 500;
-      text-align: center;
-      line-height: 1.2;
+    @media (max-width: 560px) {
+      .connections-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ── Leadership ── */
@@ -1721,50 +1747,54 @@
   <!-- Connections -->
   <section id="connections">
     <div class="connections">
-      <div class="reveal">
+      <div class="reveal" style="text-align:center">
         <div class="section-label" style="justify-content:center">Conexões</div>
         <h2 class="section-title">A <em>rede</em> que nos conecta</h2>
-        <p class="section-text" style="margin:0 auto">Produto é o hub que une diferentes áreas, garantindo alinhamento e
-          execução eficaz em toda a empresa.</p>
+        <p class="section-text" style="margin:0 auto">Produto é o hub que une diferentes áreas, garantindo alinhamento e execução eficaz em toda a empresa.</p>
       </div>
-      <div class="orbit-container reveal" style="transition-delay:.15s">
-        <div class="orbit-ring orbit-ring-1"></div>
-        <div class="orbit-ring orbit-ring-2"></div>
-        <div class="orbit-center">Produto</div>
-        <!-- Nodes positioned via JS -->
-        <div class="orbit-node" data-area="Consultoria" style="--tx:0px;--ty:-175px;transform:translate(0px,-175px)">
-          <span class="orbit-node-icon">💼</span>
-          <span class="orbit-node-label">Consultoria</span>
+      <div class="connections-hub reveal" style="transition-delay:.1s">
+        <div class="connections-hub-badge">Produto</div>
+      </div>
+      <div class="connections-grid reveal" style="transition-delay:.2s">
+        <div class="connection-card">
+          <span class="connection-card-icon">💬</span>
+          <span class="connection-card-name">Atendimento</span>
+          <p class="connection-card-desc">Escutamos as dores dos membros para aprimorar constantemente os produtos do ecossistema.</p>
         </div>
-        <div class="orbit-node" data-area="Atendimento"
-          style="--tx:-130px;--ty:-130px;transform:translate(-130px,-130px)">
-          <span class="orbit-node-icon">💬</span>
-          <span class="orbit-node-label">Atendimento</span>
+        <div class="connection-card">
+          <span class="connection-card-icon">💼</span>
+          <span class="connection-card-name">Consultoria</span>
+          <p class="connection-card-desc">Executamos estratégias de relacionamento para aumentar a proximidade do investidor com a marca.</p>
         </div>
-        <div class="orbit-node" data-area="Audiovisual"
-          style="--tx:130px;--ty:-130px;transform:translate(130px,-130px)">
-          <span class="orbit-node-icon">🎬</span>
-          <span class="orbit-node-label">Audiovisual</span>
+        <div class="connection-card">
+          <span class="connection-card-icon">🎬</span>
+          <span class="connection-card-name">Audiovisual</span>
+          <p class="connection-card-desc">Acompanhamos a criação e captação de perto para entregar o melhor conteúdo de finanças do país.</p>
         </div>
-        <div class="orbit-node" data-area="Vendas" style="--tx:175px;--ty:0px;transform:translate(175px,0px)">
-          <span class="orbit-node-icon">📈</span>
-          <span class="orbit-node-label">Vendas</span>
+        <div class="connection-card">
+          <span class="connection-card-icon">📈</span>
+          <span class="connection-card-name">Vendas</span>
+          <p class="connection-card-desc">Analisamos métricas de conversão para garantir o crescimento sustentável da base e a retenção.</p>
         </div>
-        <div class="orbit-node" data-area="Tecnologia" style="--tx:130px;--ty:130px;transform:translate(130px,130px)">
-          <span class="orbit-node-icon">⚡</span>
-          <span class="orbit-node-label">Tecnologia</span>
+        <div class="connection-card">
+          <span class="connection-card-icon">⚡</span>
+          <span class="connection-card-name">Tecnologia</span>
+          <p class="connection-card-desc">Atuamos no desenvolvimento de plataformas focadas na experiência e usabilidade do usuário.</p>
         </div>
-        <div class="orbit-node" data-area="Marketing" style="--tx:-130px;--ty:130px;transform:translate(-130px,130px)">
-          <span class="orbit-node-icon">📢</span>
-          <span class="orbit-node-label">Marketing</span>
+        <div class="connection-card">
+          <span class="connection-card-icon">🏦</span>
+          <span class="connection-card-name">Financeiro</span>
+          <p class="connection-card-desc">Fazemos a gestão de custos focada na eficiência operacional e na solidez do negócio.</p>
         </div>
-        <div class="orbit-node" data-area="Jurídico" style="--tx:-175px;--ty:0px;transform:translate(-175px,0px)">
-          <span class="orbit-node-icon">⚖️</span>
-          <span class="orbit-node-label">Jurídico</span>
+        <div class="connection-card">
+          <span class="connection-card-icon">📢</span>
+          <span class="connection-card-name">Marketing</span>
+          <p class="connection-card-desc">Criamos estratégias de aquisição baseadas em autoridade, educação e transparência.</p>
         </div>
-        <div class="orbit-node" data-area="Financeiro" style="--tx:0px;--ty:175px;transform:translate(0px,175px)">
-          <span class="orbit-node-icon">🏦</span>
-          <span class="orbit-node-label">Financeiro</span>
+        <div class="connection-card">
+          <span class="connection-card-icon">⚖️</span>
+          <span class="connection-card-name">Jurídico</span>
+          <p class="connection-card-desc">Asseguramos a conformidade com as normas do mercado financeiro e a segurança institucional.</p>
         </div>
       </div>
     </div>
