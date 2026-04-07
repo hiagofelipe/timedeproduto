@@ -965,14 +965,24 @@
       position: absolute;
       inset: -4px;
       border-radius: 18px;
-      border: 1.5px solid rgba(239, 190, 78, .35);
-      animation: nodePulse 2.5s ease-in-out infinite;
+      border: 1.5px solid rgba(239, 190, 78, .12);
+      animation: nodePulse 3s ease-in-out infinite;
       pointer-events: none;
     }
 
+    .orbit-node.active .orbit-node-pulse-ring {
+      border-color: rgba(239, 190, 78, .45);
+      animation: nodePulseActive 2.2s ease-in-out infinite;
+    }
+
     @keyframes nodePulse {
+      0%, 100% { opacity: .6; transform: scale(1); }
+      50% { opacity: 0; transform: scale(1.18); }
+    }
+
+    @keyframes nodePulseActive {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0; transform: scale(1.28); }
+      50% { opacity: 0; transform: scale(1.3); }
     }
 
     .orbit-node-icon {
@@ -1897,6 +1907,7 @@
           data-desc="Escutamos as dores dos membros para aprimorar constantemente os produtos do ecossistema."
           style="--tx:-130px;--ty:-130px;transform:translate(-130px,-130px)"
           onclick="selectNode(this)">
+          <div class="orbit-node-pulse-ring"></div>
           <span class="orbit-node-icon">💬</span>
           <span class="orbit-node-label">Atendimento</span>
         </div>
@@ -1906,6 +1917,7 @@
           data-desc="Acompanhamos a criação e captação de perto para entregar o melhor conteúdo de finanças do país."
           style="--tx:130px;--ty:-130px;transform:translate(130px,-130px)"
           onclick="selectNode(this)">
+          <div class="orbit-node-pulse-ring"></div>
           <span class="orbit-node-icon">🎬</span>
           <span class="orbit-node-label">Audiovisual</span>
         </div>
@@ -1915,6 +1927,7 @@
           data-desc="Analisamos métricas de conversão para garantir o crescimento sustentável da base e a retenção."
           style="--tx:175px;--ty:0px;transform:translate(175px,0px)"
           onclick="selectNode(this)">
+          <div class="orbit-node-pulse-ring"></div>
           <span class="orbit-node-icon">📈</span>
           <span class="orbit-node-label">Vendas</span>
         </div>
@@ -1924,6 +1937,7 @@
           data-desc="Atuamos no desenvolvimento de plataformas focadas na experiência e usabilidade do usuário."
           style="--tx:130px;--ty:130px;transform:translate(130px,130px)"
           onclick="selectNode(this)">
+          <div class="orbit-node-pulse-ring"></div>
           <span class="orbit-node-icon">⚡</span>
           <span class="orbit-node-label">Tecnologia</span>
         </div>
@@ -1933,6 +1947,7 @@
           data-desc="Criamos estratégias de aquisição baseadas em autoridade, educação e transparência."
           style="--tx:-130px;--ty:130px;transform:translate(-130px,130px)"
           onclick="selectNode(this)">
+          <div class="orbit-node-pulse-ring"></div>
           <span class="orbit-node-icon">📢</span>
           <span class="orbit-node-label">Marketing</span>
         </div>
@@ -1942,6 +1957,7 @@
           data-desc="Asseguramos a conformidade com as normas do mercado financeiro e a segurança institucional."
           style="--tx:-175px;--ty:0px;transform:translate(-175px,0px)"
           onclick="selectNode(this)">
+          <div class="orbit-node-pulse-ring"></div>
           <span class="orbit-node-icon">⚖️</span>
           <span class="orbit-node-label">Jurídico</span>
         </div>
@@ -1951,6 +1967,7 @@
           data-desc="Fazemos a gestão de custos focada na eficiência operacional e na solidez do negócio."
           style="--tx:0px;--ty:175px;transform:translate(0px,175px)"
           onclick="selectNode(this)">
+          <div class="orbit-node-pulse-ring"></div>
           <span class="orbit-node-icon">🏦</span>
           <span class="orbit-node-label">Financeiro</span>
         </div>
@@ -2221,30 +2238,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="activity-item reveal" onclick="toggleActivity(this)">
-          <div class="activity-header">
-            <div class="activity-header-left">
-              <span class="activity-icon">📦</span>
-              <div class="activity-title-group">
-                <h4>Envios de itens</h4>
-                <p class="activity-subtitle">A ponte entre a promessa e a entrega.</p>
-                <span class="activity-ver-mais">Ver mais <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2">
-                    <path d="M6 9l6 6 6-6" />
-                  </svg></span>
-              </div>
-            </div>
-          </div>
-          <div class="activity-body">
-            <div class="activity-body-inner">
-              <p class="activity-desc">Quer enviar um mimo especial ou saber o status daquela jaqueta que o Raul
-                prometeu em live? De cartas a brindes exclusivos, nós cuidamos do rastreio e da entrega do carinho aos
-                membros.</p>
-
             </div>
           </div>
         </div>
