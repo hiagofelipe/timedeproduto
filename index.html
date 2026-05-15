@@ -205,6 +205,27 @@
       color: var(--gold);
     }
 
+    .mobile-menu-close {
+      margin-top: 1rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--gray-light);
+      transition: border-color .3s, color .3s, background .3s;
+    }
+
+    .mobile-menu-close:hover {
+      border-color: rgba(239, 190, 78, .4);
+      color: var(--gold);
+      background: rgba(239, 190, 78, .06);
+    }
+
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -1555,6 +1576,9 @@
     <a href="#connections" onclick="closeMenu()">Conexões</a>
     <a href="#activities" onclick="closeMenu()">Atuação</a>
     <a href="#deliveries" onclick="closeMenu()">Entregas</a>
+    <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Fechar menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
   </div>
 
   <!-- Hero -->
